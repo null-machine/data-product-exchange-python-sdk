@@ -1,4 +1,4 @@
-# DPH Python SDK Version 0.0.1
+# DPH Python SDK Version 0.0.2
 
 Python client library to interact with various [DPH Service APIs](https://cloud.ibm.com/apidocs?category=<service-category>).
 
