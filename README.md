@@ -1,4 +1,4 @@
-# Data Product Exchange Python SDK Version 0.0.3
+# Data Product Exchange Python SDK Version 0.0.4
 
 Python client library to interact with various Data Product Exchange Service APIs.
 

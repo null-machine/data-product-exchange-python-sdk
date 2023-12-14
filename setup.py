@@ -19,7 +19,7 @@ import os
 import sys
 import pkg_resources
 
-__version__ = '0.0.3'
+__version__ = '0.0.4'
 PACKAGE_NAME = 'ibm_dpx_services'
 PACKAGE_DESC = 'Python client library for DPH Services'
 
