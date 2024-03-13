@@ -1,3 +1,10 @@
+## [0.0.5](https://github.com/IBM/data-product-exchange-python-sdk/compare/v0.0.4...v0.0.5) (2024-03-13)
+
+
+### Bug Fixes
+
+* newer apis added ([#5](https://github.com/IBM/data-product-exchange-python-sdk/issues/5)) ([ad76c46](https://github.com/IBM/data-product-exchange-python-sdk/commit/ad76c461371c76b47ecc238bc674b11027a8d043))
+
 ## [0.0.4](https://github.com/IBM/data-product-exchange-python-sdk/compare/v0.0.3...v0.0.4) (2023-12-14)
 
 
