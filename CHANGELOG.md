@@ -1,3 +1,10 @@
+## [0.0.6](https://github.com/IBM/data-product-exchange-python-sdk/compare/v0.0.5...v0.0.6) (2024-06-05)
+
+
+### Bug Fixes
+
+* upgrade requests package minimum requirement ([#7](https://github.com/IBM/data-product-exchange-python-sdk/issues/7)) ([a392fc9](https://github.com/IBM/data-product-exchange-python-sdk/commit/a392fc959891d1ac02598e029c2fb32377c2a4c4))
+
 ## [0.0.5](https://github.com/IBM/data-product-exchange-python-sdk/compare/v0.0.4...v0.0.5) (2024-03-13)
 
 
