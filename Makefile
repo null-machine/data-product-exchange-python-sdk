@@ -3,7 +3,7 @@
 # example: "make setup"
 
 PYTHON=python
-LINT_DIRS=ibm_dpx_services test/unit test/integration examples
+LINT_DIRS=dph_services test/unit test/integration examples
 
 setup: deps dev_deps install_project
 
@@ -26,7 +26,7 @@ install_project:
 test: test-unit test-int
 
 test-unit:
-	${PYTHON} -m pytest --cov=ibm_platform_services test/unit
+	${PYTHON} -m pytest --cov=dph_services test/unit
 
 test-int:
 	${PYTHON} -m pytest test/integration
