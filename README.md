@@ -1,4 +1,4 @@
-# Data Product Hub Python SDK Version 0.0.6
+# Data Product Hub Python SDK Version 0.1.0
 
 Python client library to interact with various Data Product Hub Service APIs.
 
