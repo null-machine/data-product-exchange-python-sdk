@@ -72,9 +72,7 @@ class TestNewInstance:
         """
         os.environ['TEST_SERVICE_AUTH_TYPE'] = 'noAuth'
 
-        service = DataProductHubApiServiceV1.new_instance(
-            service_name='TEST_SERVICE',
-        )
+        service = DataProductHubApiServiceV1.new_instance(service_name='TEST_SERVICE')
 
         assert service is not None
         assert isinstance(service, DataProductHubApiServiceV1)
@@ -84,9 +82,7 @@ class TestNewInstance:
         new_instance_without_authenticator()
         """
         with pytest.raises(ValueError, match='authenticator must be provided'):
-            service = DataProductHubApiServiceV1.new_instance(
-                service_name='TEST_SERVICE_NOT_FOUND',
-            )
+            service = DataProductHubApiServiceV1.new_instance(service_name='TEST_SERVICE_NOT_FOUND')
 
 
 class TestGetInitializeStatus:
@@ -101,23 +97,14 @@ class TestGetInitializeStatus:
         """
         # Set up mock
         url = preprocess_url('/data_product_exchange/v1/configuration/initialize/status')
-        mock_response = '{"container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}, "href": "https://api.example.com/configuration/initialize/status?catalog_id=d29c42eb-7100-4b7a-8257-c196dbcca1cd", "status": "not_started", "trace": "trace", "errors": [{"code": "request_body_error", "message": "message", "extra": {"anyKey": "anyValue"}, "more_info": "more_info"}], "last_started_at": "2023-08-21T15:24:06.021Z", "last_finished_at": "2023-08-21T20:24:34.450Z", "initialized_options": [{"name": "name", "version": 1}]}'
-        responses.add(
-            responses.GET,
-            url,
-            body=mock_response,
-            content_type='application/json',
-            status=200,
-        )
+        mock_response = '{"container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}, "href": "https://api.example.com/configuration/initialize/status?catalog_id=d29c42eb-7100-4b7a-8257-c196dbcca1cd", "status": "not_started", "trace": "trace", "errors": [{"code": "request_body_error", "message": "message", "extra": {"anyKey": "anyValue"}, "more_info": "more_info"}], "last_started_at": "2023-08-21T15:24:06.021Z", "last_finished_at": "2023-08-21T20:24:34.450Z", "initialized_options": [{"name": "name", "version": 1}], "workflows": {"data_access": {"definition": {"id": "18bdbde1-918e-4ecf-aa23-6727bf319e14"}}, "request_new_product": {"definition": {"id": "18bdbde1-918e-4ecf-aa23-6727bf319e14"}}}}'
+        responses.add(responses.GET, url, body=mock_response, content_type='application/json', status=200)
 
         # Set up parameter values
         container_id = 'testString'
 
         # Invoke method
-        response = _service.get_initialize_status(
-            container_id=container_id,
-            headers={},
-        )
+        response = _service.get_initialize_status(container_id=container_id, headers={})
 
         # Check for correct operation
         assert len(responses.calls) == 1
@@ -143,14 +130,8 @@ class TestGetInitializeStatus:
         """
         # Set up mock
         url = preprocess_url('/data_product_exchange/v1/configuration/initialize/status')
-        mock_response = '{"container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}, "href": "https://api.example.com/configuration/initialize/status?catalog_id=d29c42eb-7100-4b7a-8257-c196dbcca1cd", "status": "not_started", "trace": "trace", "errors": [{"code": "request_body_error", "message": "message", "extra": {"anyKey": "anyValue"}, "more_info": "more_info"}], "last_started_at": "2023-08-21T15:24:06.021Z", "last_finished_at": "2023-08-21T20:24:34.450Z", "initialized_options": [{"name": "name", "version": 1}]}'
-        responses.add(
-            responses.GET,
-            url,
-            body=mock_response,
-            content_type='application/json',
-            status=200,
-        )
+        mock_response = '{"container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}, "href": "https://api.example.com/configuration/initialize/status?catalog_id=d29c42eb-7100-4b7a-8257-c196dbcca1cd", "status": "not_started", "trace": "trace", "errors": [{"code": "request_body_error", "message": "message", "extra": {"anyKey": "anyValue"}, "more_info": "more_info"}], "last_started_at": "2023-08-21T15:24:06.021Z", "last_finished_at": "2023-08-21T20:24:34.450Z", "initialized_options": [{"name": "name", "version": 1}], "workflows": {"data_access": {"definition": {"id": "18bdbde1-918e-4ecf-aa23-6727bf319e14"}}, "request_new_product": {"definition": {"id": "18bdbde1-918e-4ecf-aa23-6727bf319e14"}}}}'
+        responses.add(responses.GET, url, body=mock_response, content_type='application/json', status=200)
 
         # Invoke method
         response = _service.get_initialize_status()
@@ -182,13 +163,7 @@ class TestGetServiceIdCredentials:
         # Set up mock
         url = preprocess_url('/data_product_exchange/v1/configuration/credentials')
         mock_response = '{"name": "data-product-admin-service-id-API-key", "created_at": "2024-03-15T04:07+0000"}'
-        responses.add(
-            responses.GET,
-            url,
-            body=mock_response,
-            content_type='application/json',
-            status=200,
-        )
+        responses.add(responses.GET, url, body=mock_response, content_type='application/json', status=200)
 
         # Invoke method
         response = _service.get_service_id_credentials()
@@ -219,14 +194,8 @@ class TestInitialize:
         """
         # Set up mock
         url = preprocess_url('/data_product_exchange/v1/configuration/initialize')
-        mock_response = '{"container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}, "href": "https://api.example.com/configuration/initialize/status?catalog_id=d29c42eb-7100-4b7a-8257-c196dbcca1cd", "status": "not_started", "trace": "trace", "errors": [{"code": "request_body_error", "message": "message", "extra": {"anyKey": "anyValue"}, "more_info": "more_info"}], "last_started_at": "2023-08-21T15:24:06.021Z", "last_finished_at": "2023-08-21T20:24:34.450Z", "initialized_options": [{"name": "name", "version": 1}]}'
-        responses.add(
-            responses.POST,
-            url,
-            body=mock_response,
-            content_type='application/json',
-            status=202,
-        )
+        mock_response = '{"container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}, "href": "https://api.example.com/configuration/initialize/status?catalog_id=d29c42eb-7100-4b7a-8257-c196dbcca1cd", "status": "not_started", "trace": "trace", "errors": [{"code": "request_body_error", "message": "message", "extra": {"anyKey": "anyValue"}, "more_info": "more_info"}], "last_started_at": "2023-08-21T15:24:06.021Z", "last_finished_at": "2023-08-21T20:24:34.450Z", "initialized_options": [{"name": "name", "version": 1}], "workflows": {"data_access": {"definition": {"id": "18bdbde1-918e-4ecf-aa23-6727bf319e14"}}, "request_new_product": {"definition": {"id": "18bdbde1-918e-4ecf-aa23-6727bf319e14"}}}}'
+        responses.add(responses.POST, url, body=mock_response, content_type='application/json', status=202)
 
         # Construct a dict representation of a ContainerReference model
         container_reference_model = {}
@@ -235,14 +204,17 @@ class TestInitialize:
 
         # Set up parameter values
         container = container_reference_model
-        include = ['delivery_methods', 'domains_multi_industry', 'data_product_samples', 'workflows', 'project']
+        include = [
+            'delivery_methods',
+            'domains_multi_industry',
+            'data_product_samples',
+            'workflows',
+            'project',
+            'catalog_configurations',
+        ]
 
         # Invoke method
-        response = _service.initialize(
-            container=container,
-            include=include,
-            headers={},
-        )
+        response = _service.initialize(container=container, include=include, headers={})
 
         # Check for correct operation
         assert len(responses.calls) == 1
@@ -256,6 +228,7 @@ class TestInitialize:
             'data_product_samples',
             'workflows',
             'project',
+            'catalog_configurations',
         ]
 
     def test_initialize_all_params_with_retries(self):
@@ -280,11 +253,7 @@ class TestManageApiKeys:
         """
         # Set up mock
         url = preprocess_url('/data_product_exchange/v1/configuration/rotate_credentials')
-        responses.add(
-            responses.POST,
-            url,
-            status=204,
-        )
+        responses.add(responses.POST, url, status=204)
 
         # Invoke method
         response = _service.manage_api_keys()
@@ -325,9 +294,7 @@ class TestNewInstance:
         """
         os.environ['TEST_SERVICE_AUTH_TYPE'] = 'noAuth'
 
-        service = DataProductHubApiServiceV1.new_instance(
-            service_name='TEST_SERVICE',
-        )
+        service = DataProductHubApiServiceV1.new_instance(service_name='TEST_SERVICE')
 
         assert service is not None
         assert isinstance(service, DataProductHubApiServiceV1)
@@ -337,9 +304,7 @@ class TestNewInstance:
         new_instance_without_authenticator()
         """
         with pytest.raises(ValueError, match='authenticator must be provided'):
-            service = DataProductHubApiServiceV1.new_instance(
-                service_name='TEST_SERVICE_NOT_FOUND',
-            )
+            service = DataProductHubApiServiceV1.new_instance(service_name='TEST_SERVICE_NOT_FOUND')
 
 
 class TestListDataProducts:
@@ -354,25 +319,15 @@ class TestListDataProducts:
         """
         # Set up mock
         url = preprocess_url('/data_product_exchange/v1/data_products')
-        mock_response = '{"limit": 200, "first": {"href": "https://api.example.com/collection"}, "next": {"href": "https://api.example.com/collection?start=eyJvZmZzZXQiOjAsImRvbmUiOnRydWV9", "start": "eyJvZmZzZXQiOjAsImRvbmUiOnRydWV9"}, "data_products": [{"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}]}'
-        responses.add(
-            responses.GET,
-            url,
-            body=mock_response,
-            content_type='application/json',
-            status=200,
-        )
+        mock_response = '{"limit": 200, "first": {"href": "https://api.example.com/collection"}, "next": {"href": "https://api.example.com/collection?start=eyJvZmZzZXQiOjAsImRvbmUiOnRydWV9", "start": "eyJvZmZzZXQiOjAsImRvbmUiOnRydWV9"}, "data_products": [{"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "release": {"id": "18bdbde1-918e-4ecf-aa23-6727bf319e14"}, "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}]}'
+        responses.add(responses.GET, url, body=mock_response, content_type='application/json', status=200)
 
         # Set up parameter values
         limit = 200
         start = 'testString'
 
         # Invoke method
-        response = _service.list_data_products(
-            limit=limit,
-            start=start,
-            headers={},
-        )
+        response = _service.list_data_products(limit=limit, start=start, headers={})
 
         # Check for correct operation
         assert len(responses.calls) == 1
@@ -399,14 +354,8 @@ class TestListDataProducts:
         """
         # Set up mock
         url = preprocess_url('/data_product_exchange/v1/data_products')
-        mock_response = '{"limit": 200, "first": {"href": "https://api.example.com/collection"}, "next": {"href": "https://api.example.com/collection?start=eyJvZmZzZXQiOjAsImRvbmUiOnRydWV9", "start": "eyJvZmZzZXQiOjAsImRvbmUiOnRydWV9"}, "data_products": [{"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}]}'
-        responses.add(
-            responses.GET,
-            url,
-            body=mock_response,
-            content_type='application/json',
-            status=200,
-        )
+        mock_response = '{"limit": 200, "first": {"href": "https://api.example.com/collection"}, "next": {"href": "https://api.example.com/collection?start=eyJvZmZzZXQiOjAsImRvbmUiOnRydWV9", "start": "eyJvZmZzZXQiOjAsImRvbmUiOnRydWV9"}, "data_products": [{"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "release": {"id": "18bdbde1-918e-4ecf-aa23-6727bf319e14"}, "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}]}'
+        responses.add(responses.GET, url, body=mock_response, content_type='application/json', status=200)
 
         # Invoke method
         response = _service.list_data_products()
@@ -431,29 +380,14 @@ class TestListDataProducts:
         """
         # Set up a two-page mock response
         url = preprocess_url('/data_product_exchange/v1/data_products')
-        mock_response1 = '{"next":{"start":"1"},"total_count":2,"limit":1,"data_products":[{"id":"b38df608-d34b-4d58-8136-ed25e6c6684e","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}}]}'
-        mock_response2 = '{"total_count":2,"limit":1,"data_products":[{"id":"b38df608-d34b-4d58-8136-ed25e6c6684e","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}}]}'
-        responses.add(
-            responses.GET,
-            url,
-            body=mock_response1,
-            content_type='application/json',
-            status=200,
-        )
-        responses.add(
-            responses.GET,
-            url,
-            body=mock_response2,
-            content_type='application/json',
-            status=200,
-        )
+        mock_response1 = '{"next":{"start":"1"},"total_count":2,"limit":1,"data_products":[{"id":"b38df608-d34b-4d58-8136-ed25e6c6684e","release":{"id":"18bdbde1-918e-4ecf-aa23-6727bf319e14"},"container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}}]}'
+        mock_response2 = '{"total_count":2,"limit":1,"data_products":[{"id":"b38df608-d34b-4d58-8136-ed25e6c6684e","release":{"id":"18bdbde1-918e-4ecf-aa23-6727bf319e14"},"container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}}]}'
+        responses.add(responses.GET, url, body=mock_response1, content_type='application/json', status=200)
+        responses.add(responses.GET, url, body=mock_response2, content_type='application/json', status=200)
 
         # Exercise the pager class for this operation
         all_results = []
-        pager = DataProductsPager(
-            client=_service,
-            limit=10,
-        )
+        pager = DataProductsPager(client=_service, limit=10)
         while pager.has_next():
             next_page = pager.get_next()
             assert next_page is not None
@@ -467,28 +401,13 @@ class TestListDataProducts:
         """
         # Set up a two-page mock response
         url = preprocess_url('/data_product_exchange/v1/data_products')
-        mock_response1 = '{"next":{"start":"1"},"total_count":2,"limit":1,"data_products":[{"id":"b38df608-d34b-4d58-8136-ed25e6c6684e","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}}]}'
-        mock_response2 = '{"total_count":2,"limit":1,"data_products":[{"id":"b38df608-d34b-4d58-8136-ed25e6c6684e","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}}]}'
-        responses.add(
-            responses.GET,
-            url,
-            body=mock_response1,
-            content_type='application/json',
-            status=200,
-        )
-        responses.add(
-            responses.GET,
-            url,
-            body=mock_response2,
-            content_type='application/json',
-            status=200,
-        )
+        mock_response1 = '{"next":{"start":"1"},"total_count":2,"limit":1,"data_products":[{"id":"b38df608-d34b-4d58-8136-ed25e6c6684e","release":{"id":"18bdbde1-918e-4ecf-aa23-6727bf319e14"},"container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}}]}'
+        mock_response2 = '{"total_count":2,"limit":1,"data_products":[{"id":"b38df608-d34b-4d58-8136-ed25e6c6684e","release":{"id":"18bdbde1-918e-4ecf-aa23-6727bf319e14"},"container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}}]}'
+        responses.add(responses.GET, url, body=mock_response1, content_type='application/json', status=200)
+        responses.add(responses.GET, url, body=mock_response2, content_type='application/json', status=200)
 
         # Exercise the pager class for this operation
-        pager = DataProductsPager(
-            client=_service,
-            limit=10,
-        )
+        pager = DataProductsPager(client=_service, limit=10)
         all_results = pager.get_all()
         assert all_results is not None
         assert len(all_results) == 2
@@ -506,18 +425,17 @@ class TestCreateDataProduct:
         """
         # Set up mock
         url = preprocess_url('/data_product_exchange/v1/data_products')
-        mock_response = '{"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}, "latest_release": {"version": "1.0.0", "state": "draft", "data_product": {"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "name": "My Data Product", "description": "This is a description of My Data Product.", "tags": ["tags"], "use_cases": [{"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}], "types": ["data"], "contract_terms": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "id": "id", "documents": [{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}]}], "is_restricted": false, "id": "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd", "asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}}, "drafts": [{"version": "1.0.0", "state": "draft", "data_product": {"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "name": "My Data Product", "description": "This is a description of My Data Product.", "tags": ["tags"], "use_cases": [{"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}], "types": ["data"], "contract_terms": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "id": "id", "documents": [{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}]}], "is_restricted": false, "id": "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd", "asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}}]}'
-        responses.add(
-            responses.POST,
-            url,
-            body=mock_response,
-            content_type='application/json',
-            status=201,
-        )
+        mock_response = '{"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "release": {"id": "18bdbde1-918e-4ecf-aa23-6727bf319e14"}, "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}, "latest_release": {"version": "1.0.0", "state": "draft", "data_product": {"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "release": {"id": "18bdbde1-918e-4ecf-aa23-6727bf319e14"}, "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "name": "My Data Product", "description": "This is a description of My Data Product.", "tags": ["tags"], "use_cases": [{"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}], "types": ["data"], "contract_terms": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "id": "id", "documents": [{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}], "error_msg": "error_msg"}], "is_restricted": false, "id": "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd", "asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}}, "drafts": [{"version": "1.0.0", "state": "draft", "data_product": {"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "release": {"id": "18bdbde1-918e-4ecf-aa23-6727bf319e14"}, "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "name": "My Data Product", "description": "This is a description of My Data Product.", "tags": ["tags"], "use_cases": [{"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}], "types": ["data"], "contract_terms": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "id": "id", "documents": [{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}], "error_msg": "error_msg"}], "is_restricted": false, "id": "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd", "asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}}]}'
+        responses.add(responses.POST, url, body=mock_response, content_type='application/json', status=201)
+
+        # Construct a dict representation of a DataProductDraftVersionRelease model
+        data_product_draft_version_release_model = {}
+        data_product_draft_version_release_model['id'] = '18bdbde1-918e-4ecf-aa23-6727bf319e14'
 
         # Construct a dict representation of a DataProductIdentity model
         data_product_identity_model = {}
         data_product_identity_model['id'] = 'b38df608-d34b-4d58-8136-ed25e6c6684e'
+        data_product_identity_model['release'] = data_product_draft_version_release_model
 
         # Construct a dict representation of a ContainerReference model
         container_reference_model = {}
@@ -553,6 +471,7 @@ class TestCreateDataProduct:
         data_product_contract_terms_model['asset'] = asset_reference_model
         data_product_contract_terms_model['id'] = 'testString'
         data_product_contract_terms_model['documents'] = [contract_terms_document_model]
+        data_product_contract_terms_model['error_msg'] = 'testString'
 
         # Construct a dict representation of a ContainerIdentity model
         container_identity_model = {}
@@ -585,9 +504,17 @@ class TestCreateDataProduct:
         data_product_part_model['asset'] = asset_part_reference_model
         data_product_part_model['delivery_methods'] = [delivery_method_model]
 
+        # Construct a dict representation of a DataProductCustomWorkflowDefinition model
+        data_product_custom_workflow_definition_model = {}
+        data_product_custom_workflow_definition_model['id'] = '18bdbde1-918e-4ecf-aa23-6727bf319e14'
+
         # Construct a dict representation of a DataProductOrderAccessRequest model
         data_product_order_access_request_model = {}
         data_product_order_access_request_model['task_assignee_users'] = ['testString']
+        data_product_order_access_request_model['pre_approved_users'] = ['testString']
+        data_product_order_access_request_model['custom_workflow_definition'] = (
+            data_product_custom_workflow_definition_model
+        )
 
         # Construct a dict representation of a DataProductWorkflows model
         data_product_workflows_model = {}
@@ -614,10 +541,7 @@ class TestCreateDataProduct:
         drafts = [data_product_version_prototype_model]
 
         # Invoke method
-        response = _service.create_data_product(
-            drafts,
-            headers={},
-        )
+        response = _service.create_data_product(drafts, headers={})
 
         # Check for correct operation
         assert len(responses.calls) == 1
@@ -642,18 +566,17 @@ class TestCreateDataProduct:
         """
         # Set up mock
         url = preprocess_url('/data_product_exchange/v1/data_products')
-        mock_response = '{"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}, "latest_release": {"version": "1.0.0", "state": "draft", "data_product": {"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "name": "My Data Product", "description": "This is a description of My Data Product.", "tags": ["tags"], "use_cases": [{"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}], "types": ["data"], "contract_terms": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "id": "id", "documents": [{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}]}], "is_restricted": false, "id": "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd", "asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}}, "drafts": [{"version": "1.0.0", "state": "draft", "data_product": {"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "name": "My Data Product", "description": "This is a description of My Data Product.", "tags": ["tags"], "use_cases": [{"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}], "types": ["data"], "contract_terms": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "id": "id", "documents": [{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}]}], "is_restricted": false, "id": "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd", "asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}}]}'
-        responses.add(
-            responses.POST,
-            url,
-            body=mock_response,
-            content_type='application/json',
-            status=201,
-        )
+        mock_response = '{"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "release": {"id": "18bdbde1-918e-4ecf-aa23-6727bf319e14"}, "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}, "latest_release": {"version": "1.0.0", "state": "draft", "data_product": {"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "release": {"id": "18bdbde1-918e-4ecf-aa23-6727bf319e14"}, "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "name": "My Data Product", "description": "This is a description of My Data Product.", "tags": ["tags"], "use_cases": [{"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}], "types": ["data"], "contract_terms": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "id": "id", "documents": [{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}], "error_msg": "error_msg"}], "is_restricted": false, "id": "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd", "asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}}, "drafts": [{"version": "1.0.0", "state": "draft", "data_product": {"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "release": {"id": "18bdbde1-918e-4ecf-aa23-6727bf319e14"}, "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "name": "My Data Product", "description": "This is a description of My Data Product.", "tags": ["tags"], "use_cases": [{"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}], "types": ["data"], "contract_terms": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "id": "id", "documents": [{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}], "error_msg": "error_msg"}], "is_restricted": false, "id": "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd", "asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}}]}'
+        responses.add(responses.POST, url, body=mock_response, content_type='application/json', status=201)
+
+        # Construct a dict representation of a DataProductDraftVersionRelease model
+        data_product_draft_version_release_model = {}
+        data_product_draft_version_release_model['id'] = '18bdbde1-918e-4ecf-aa23-6727bf319e14'
 
         # Construct a dict representation of a DataProductIdentity model
         data_product_identity_model = {}
         data_product_identity_model['id'] = 'b38df608-d34b-4d58-8136-ed25e6c6684e'
+        data_product_identity_model['release'] = data_product_draft_version_release_model
 
         # Construct a dict representation of a ContainerReference model
         container_reference_model = {}
@@ -689,6 +612,7 @@ class TestCreateDataProduct:
         data_product_contract_terms_model['asset'] = asset_reference_model
         data_product_contract_terms_model['id'] = 'testString'
         data_product_contract_terms_model['documents'] = [contract_terms_document_model]
+        data_product_contract_terms_model['error_msg'] = 'testString'
 
         # Construct a dict representation of a ContainerIdentity model
         container_identity_model = {}
@@ -721,9 +645,17 @@ class TestCreateDataProduct:
         data_product_part_model['asset'] = asset_part_reference_model
         data_product_part_model['delivery_methods'] = [delivery_method_model]
 
+        # Construct a dict representation of a DataProductCustomWorkflowDefinition model
+        data_product_custom_workflow_definition_model = {}
+        data_product_custom_workflow_definition_model['id'] = '18bdbde1-918e-4ecf-aa23-6727bf319e14'
+
         # Construct a dict representation of a DataProductOrderAccessRequest model
         data_product_order_access_request_model = {}
         data_product_order_access_request_model['task_assignee_users'] = ['testString']
+        data_product_order_access_request_model['pre_approved_users'] = ['testString']
+        data_product_order_access_request_model['custom_workflow_definition'] = (
+            data_product_custom_workflow_definition_model
+        )
 
         # Construct a dict representation of a DataProductWorkflows model
         data_product_workflows_model = {}
@@ -750,9 +682,7 @@ class TestCreateDataProduct:
         drafts = [data_product_version_prototype_model]
 
         # Pass in all but one required param and check for a ValueError
-        req_param_dict = {
-            "drafts": drafts,
-        }
+        req_param_dict = {"drafts": drafts}
         for param in req_param_dict.keys():
             req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
             with pytest.raises(ValueError):
@@ -780,23 +710,14 @@ class TestGetDataProduct:
         """
         # Set up mock
         url = preprocess_url('/data_product_exchange/v1/data_products/testString')
-        mock_response = '{"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}, "latest_release": {"version": "1.0.0", "state": "draft", "data_product": {"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "name": "My Data Product", "description": "This is a description of My Data Product.", "tags": ["tags"], "use_cases": [{"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}], "types": ["data"], "contract_terms": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "id": "id", "documents": [{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}]}], "is_restricted": false, "id": "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd", "asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}}, "drafts": [{"version": "1.0.0", "state": "draft", "data_product": {"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "name": "My Data Product", "description": "This is a description of My Data Product.", "tags": ["tags"], "use_cases": [{"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}], "types": ["data"], "contract_terms": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "id": "id", "documents": [{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}]}], "is_restricted": false, "id": "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd", "asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}}]}'
-        responses.add(
-            responses.GET,
-            url,
-            body=mock_response,
-            content_type='application/json',
-            status=200,
-        )
+        mock_response = '{"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "release": {"id": "18bdbde1-918e-4ecf-aa23-6727bf319e14"}, "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}, "latest_release": {"version": "1.0.0", "state": "draft", "data_product": {"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "release": {"id": "18bdbde1-918e-4ecf-aa23-6727bf319e14"}, "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "name": "My Data Product", "description": "This is a description of My Data Product.", "tags": ["tags"], "use_cases": [{"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}], "types": ["data"], "contract_terms": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "id": "id", "documents": [{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}], "error_msg": "error_msg"}], "is_restricted": false, "id": "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd", "asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}}, "drafts": [{"version": "1.0.0", "state": "draft", "data_product": {"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "release": {"id": "18bdbde1-918e-4ecf-aa23-6727bf319e14"}, "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "name": "My Data Product", "description": "This is a description of My Data Product.", "tags": ["tags"], "use_cases": [{"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}], "types": ["data"], "contract_terms": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "id": "id", "documents": [{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}], "error_msg": "error_msg"}], "is_restricted": false, "id": "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd", "asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}}]}'
+        responses.add(responses.GET, url, body=mock_response, content_type='application/json', status=200)
 
         # Set up parameter values
         data_product_id = 'testString'
 
         # Invoke method
-        response = _service.get_data_product(
-            data_product_id,
-            headers={},
-        )
+        response = _service.get_data_product(data_product_id, headers={})
 
         # Check for correct operation
         assert len(responses.calls) == 1
@@ -818,22 +739,14 @@ class TestGetDataProduct:
         """
         # Set up mock
         url = preprocess_url('/data_product_exchange/v1/data_products/testString')
-        mock_response = '{"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}, "latest_release": {"version": "1.0.0", "state": "draft", "data_product": {"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "name": "My Data Product", "description": "This is a description of My Data Product.", "tags": ["tags"], "use_cases": [{"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}], "types": ["data"], "contract_terms": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "id": "id", "documents": [{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}]}], "is_restricted": false, "id": "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd", "asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}}, "drafts": [{"version": "1.0.0", "state": "draft", "data_product": {"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "name": "My Data Product", "description": "This is a description of My Data Product.", "tags": ["tags"], "use_cases": [{"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}], "types": ["data"], "contract_terms": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "id": "id", "documents": [{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}]}], "is_restricted": false, "id": "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd", "asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}}]}'
-        responses.add(
-            responses.GET,
-            url,
-            body=mock_response,
-            content_type='application/json',
-            status=200,
-        )
+        mock_response = '{"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "release": {"id": "18bdbde1-918e-4ecf-aa23-6727bf319e14"}, "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}, "latest_release": {"version": "1.0.0", "state": "draft", "data_product": {"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "release": {"id": "18bdbde1-918e-4ecf-aa23-6727bf319e14"}, "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "name": "My Data Product", "description": "This is a description of My Data Product.", "tags": ["tags"], "use_cases": [{"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}], "types": ["data"], "contract_terms": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "id": "id", "documents": [{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}], "error_msg": "error_msg"}], "is_restricted": false, "id": "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd", "asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}}, "drafts": [{"version": "1.0.0", "state": "draft", "data_product": {"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "release": {"id": "18bdbde1-918e-4ecf-aa23-6727bf319e14"}, "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "name": "My Data Product", "description": "This is a description of My Data Product.", "tags": ["tags"], "use_cases": [{"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}], "types": ["data"], "contract_terms": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "id": "id", "documents": [{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}], "error_msg": "error_msg"}], "is_restricted": false, "id": "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd", "asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}}]}'
+        responses.add(responses.GET, url, body=mock_response, content_type='application/json', status=200)
 
         # Set up parameter values
         data_product_id = 'testString'
 
         # Pass in all but one required param and check for a ValueError
-        req_param_dict = {
-            "data_product_id": data_product_id,
-        }
+        req_param_dict = {"data_product_id": data_product_id}
         for param in req_param_dict.keys():
             req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
             with pytest.raises(ValueError):
@@ -871,9 +784,7 @@ class TestNewInstance:
         """
         os.environ['TEST_SERVICE_AUTH_TYPE'] = 'noAuth'
 
-        service = DataProductHubApiServiceV1.new_instance(
-            service_name='TEST_SERVICE',
-        )
+        service = DataProductHubApiServiceV1.new_instance(service_name='TEST_SERVICE')
 
         assert service is not None
         assert isinstance(service, DataProductHubApiServiceV1)
@@ -883,9 +794,7 @@ class TestNewInstance:
         new_instance_without_authenticator()
         """
         with pytest.raises(ValueError, match='authenticator must be provided'):
-            service = DataProductHubApiServiceV1.new_instance(
-                service_name='TEST_SERVICE_NOT_FOUND',
-            )
+            service = DataProductHubApiServiceV1.new_instance(service_name='TEST_SERVICE_NOT_FOUND')
 
 
 class TestCompleteDraftContractTermsDocument:
@@ -903,13 +812,7 @@ class TestCompleteDraftContractTermsDocument:
             '/data_product_exchange/v1/data_products/testString/drafts/testString/contract_terms/testString/documents/testString/complete'
         )
         mock_response = '{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}'
-        responses.add(
-            responses.POST,
-            url,
-            body=mock_response,
-            content_type='application/json',
-            status=200,
-        )
+        responses.add(responses.POST, url, body=mock_response, content_type='application/json', status=200)
 
         # Set up parameter values
         data_product_id = 'testString'
@@ -919,11 +822,7 @@ class TestCompleteDraftContractTermsDocument:
 
         # Invoke method
         response = _service.complete_draft_contract_terms_document(
-            data_product_id,
-            draft_id,
-            contract_terms_id,
-            document_id,
-            headers={},
+            data_product_id, draft_id, contract_terms_id, document_id, headers={}
         )
 
         # Check for correct operation
@@ -949,13 +848,7 @@ class TestCompleteDraftContractTermsDocument:
             '/data_product_exchange/v1/data_products/testString/drafts/testString/contract_terms/testString/documents/testString/complete'
         )
         mock_response = '{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}'
-        responses.add(
-            responses.POST,
-            url,
-            body=mock_response,
-            content_type='application/json',
-            status=200,
-        )
+        responses.add(responses.POST, url, body=mock_response, content_type='application/json', status=200)
 
         # Set up parameter values
         data_product_id = 'testString'
@@ -997,14 +890,8 @@ class TestListDataProductDrafts:
         """
         # Set up mock
         url = preprocess_url('/data_product_exchange/v1/data_products/testString/drafts')
-        mock_response = '{"limit": 200, "first": {"href": "https://api.example.com/collection"}, "next": {"href": "https://api.example.com/collection?start=eyJvZmZzZXQiOjAsImRvbmUiOnRydWV9", "start": "eyJvZmZzZXQiOjAsImRvbmUiOnRydWV9"}, "drafts": [{"version": "1.0.0", "state": "draft", "data_product": {"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "name": "My Data Product", "description": "This is a description of My Data Product.", "tags": ["tags"], "use_cases": [{"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}], "types": ["data"], "contract_terms": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "id": "id", "documents": [{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}]}], "is_restricted": false, "id": "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd", "asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}}]}'
-        responses.add(
-            responses.GET,
-            url,
-            body=mock_response,
-            content_type='application/json',
-            status=200,
-        )
+        mock_response = '{"limit": 200, "first": {"href": "https://api.example.com/collection"}, "next": {"href": "https://api.example.com/collection?start=eyJvZmZzZXQiOjAsImRvbmUiOnRydWV9", "start": "eyJvZmZzZXQiOjAsImRvbmUiOnRydWV9"}, "drafts": [{"version": "1.0.0", "state": "draft", "data_product": {"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "release": {"id": "18bdbde1-918e-4ecf-aa23-6727bf319e14"}, "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "name": "My Data Product", "description": "This is a description of My Data Product.", "tags": ["tags"], "use_cases": [{"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}], "types": ["data"], "contract_terms": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "id": "id", "documents": [{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}], "error_msg": "error_msg"}], "is_restricted": false, "id": "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd", "asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}}]}'
+        responses.add(responses.GET, url, body=mock_response, content_type='application/json', status=200)
 
         # Set up parameter values
         data_product_id = 'testString'
@@ -1050,23 +937,14 @@ class TestListDataProductDrafts:
         """
         # Set up mock
         url = preprocess_url('/data_product_exchange/v1/data_products/testString/drafts')
-        mock_response = '{"limit": 200, "first": {"href": "https://api.example.com/collection"}, "next": {"href": "https://api.example.com/collection?start=eyJvZmZzZXQiOjAsImRvbmUiOnRydWV9", "start": "eyJvZmZzZXQiOjAsImRvbmUiOnRydWV9"}, "drafts": [{"version": "1.0.0", "state": "draft", "data_product": {"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "name": "My Data Product", "description": "This is a description of My Data Product.", "tags": ["tags"], "use_cases": [{"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}], "types": ["data"], "contract_terms": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "id": "id", "documents": [{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}]}], "is_restricted": false, "id": "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd", "asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}}]}'
-        responses.add(
-            responses.GET,
-            url,
-            body=mock_response,
-            content_type='application/json',
-            status=200,
-        )
+        mock_response = '{"limit": 200, "first": {"href": "https://api.example.com/collection"}, "next": {"href": "https://api.example.com/collection?start=eyJvZmZzZXQiOjAsImRvbmUiOnRydWV9", "start": "eyJvZmZzZXQiOjAsImRvbmUiOnRydWV9"}, "drafts": [{"version": "1.0.0", "state": "draft", "data_product": {"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "release": {"id": "18bdbde1-918e-4ecf-aa23-6727bf319e14"}, "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "name": "My Data Product", "description": "This is a description of My Data Product.", "tags": ["tags"], "use_cases": [{"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}], "types": ["data"], "contract_terms": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "id": "id", "documents": [{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}], "error_msg": "error_msg"}], "is_restricted": false, "id": "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd", "asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}}]}'
+        responses.add(responses.GET, url, body=mock_response, content_type='application/json', status=200)
 
         # Set up parameter values
         data_product_id = 'testString'
 
         # Invoke method
-        response = _service.list_data_product_drafts(
-            data_product_id,
-            headers={},
-        )
+        response = _service.list_data_product_drafts(data_product_id, headers={})
 
         # Check for correct operation
         assert len(responses.calls) == 1
@@ -1088,22 +966,14 @@ class TestListDataProductDrafts:
         """
         # Set up mock
         url = preprocess_url('/data_product_exchange/v1/data_products/testString/drafts')
-        mock_response = '{"limit": 200, "first": {"href": "https://api.example.com/collection"}, "next": {"href": "https://api.example.com/collection?start=eyJvZmZzZXQiOjAsImRvbmUiOnRydWV9", "start": "eyJvZmZzZXQiOjAsImRvbmUiOnRydWV9"}, "drafts": [{"version": "1.0.0", "state": "draft", "data_product": {"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "name": "My Data Product", "description": "This is a description of My Data Product.", "tags": ["tags"], "use_cases": [{"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}], "types": ["data"], "contract_terms": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "id": "id", "documents": [{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}]}], "is_restricted": false, "id": "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd", "asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}}]}'
-        responses.add(
-            responses.GET,
-            url,
-            body=mock_response,
-            content_type='application/json',
-            status=200,
-        )
+        mock_response = '{"limit": 200, "first": {"href": "https://api.example.com/collection"}, "next": {"href": "https://api.example.com/collection?start=eyJvZmZzZXQiOjAsImRvbmUiOnRydWV9", "start": "eyJvZmZzZXQiOjAsImRvbmUiOnRydWV9"}, "drafts": [{"version": "1.0.0", "state": "draft", "data_product": {"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "release": {"id": "18bdbde1-918e-4ecf-aa23-6727bf319e14"}, "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "name": "My Data Product", "description": "This is a description of My Data Product.", "tags": ["tags"], "use_cases": [{"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}], "types": ["data"], "contract_terms": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "id": "id", "documents": [{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}], "error_msg": "error_msg"}], "is_restricted": false, "id": "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd", "asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}}]}'
+        responses.add(responses.GET, url, body=mock_response, content_type='application/json', status=200)
 
         # Set up parameter values
         data_product_id = 'testString'
 
         # Pass in all but one required param and check for a ValueError
-        req_param_dict = {
-            "data_product_id": data_product_id,
-        }
+        req_param_dict = {"data_product_id": data_product_id}
         for param in req_param_dict.keys():
             req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
             with pytest.raises(ValueError):
@@ -1125,22 +995,10 @@ class TestListDataProductDrafts:
         """
         # Set up a two-page mock response
         url = preprocess_url('/data_product_exchange/v1/data_products/testString/drafts')
-        mock_response1 = '{"next":{"start":"1"},"total_count":2,"limit":1,"drafts":[{"version":"1.0.0","state":"draft","data_product":{"id":"b38df608-d34b-4d58-8136-ed25e6c6684e","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}},"name":"My Data Product","description":"This is a description of My Data Product.","tags":["tags"],"use_cases":[{"id":"id","name":"name","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}}],"types":["data"],"contract_terms":[{"asset":{"id":"2b0bf220-079c-11ee-be56-0242ac120002","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}},"id":"id","documents":[{"url":"url","type":"terms_and_conditions","name":"name","id":"2b0bf220-079c-11ee-be56-0242ac120002","attachment":{"id":"id"},"upload_url":"upload_url"}]}],"is_restricted":false,"id":"2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd","asset":{"id":"2b0bf220-079c-11ee-be56-0242ac120002","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}}}]}'
-        mock_response2 = '{"total_count":2,"limit":1,"drafts":[{"version":"1.0.0","state":"draft","data_product":{"id":"b38df608-d34b-4d58-8136-ed25e6c6684e","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}},"name":"My Data Product","description":"This is a description of My Data Product.","tags":["tags"],"use_cases":[{"id":"id","name":"name","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}}],"types":["data"],"contract_terms":[{"asset":{"id":"2b0bf220-079c-11ee-be56-0242ac120002","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}},"id":"id","documents":[{"url":"url","type":"terms_and_conditions","name":"name","id":"2b0bf220-079c-11ee-be56-0242ac120002","attachment":{"id":"id"},"upload_url":"upload_url"}]}],"is_restricted":false,"id":"2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd","asset":{"id":"2b0bf220-079c-11ee-be56-0242ac120002","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}}}]}'
-        responses.add(
-            responses.GET,
-            url,
-            body=mock_response1,
-            content_type='application/json',
-            status=200,
-        )
-        responses.add(
-            responses.GET,
-            url,
-            body=mock_response2,
-            content_type='application/json',
-            status=200,
-        )
+        mock_response1 = '{"next":{"start":"1"},"total_count":2,"limit":1,"drafts":[{"version":"1.0.0","state":"draft","data_product":{"id":"b38df608-d34b-4d58-8136-ed25e6c6684e","release":{"id":"18bdbde1-918e-4ecf-aa23-6727bf319e14"},"container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}},"name":"My Data Product","description":"This is a description of My Data Product.","tags":["tags"],"use_cases":[{"id":"id","name":"name","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}}],"types":["data"],"contract_terms":[{"asset":{"id":"2b0bf220-079c-11ee-be56-0242ac120002","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}},"id":"id","documents":[{"url":"url","type":"terms_and_conditions","name":"name","id":"2b0bf220-079c-11ee-be56-0242ac120002","attachment":{"id":"id"},"upload_url":"upload_url"}],"error_msg":"error_msg"}],"is_restricted":false,"id":"2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd","asset":{"id":"2b0bf220-079c-11ee-be56-0242ac120002","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}}}]}'
+        mock_response2 = '{"total_count":2,"limit":1,"drafts":[{"version":"1.0.0","state":"draft","data_product":{"id":"b38df608-d34b-4d58-8136-ed25e6c6684e","release":{"id":"18bdbde1-918e-4ecf-aa23-6727bf319e14"},"container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}},"name":"My Data Product","description":"This is a description of My Data Product.","tags":["tags"],"use_cases":[{"id":"id","name":"name","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}}],"types":["data"],"contract_terms":[{"asset":{"id":"2b0bf220-079c-11ee-be56-0242ac120002","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}},"id":"id","documents":[{"url":"url","type":"terms_and_conditions","name":"name","id":"2b0bf220-079c-11ee-be56-0242ac120002","attachment":{"id":"id"},"upload_url":"upload_url"}],"error_msg":"error_msg"}],"is_restricted":false,"id":"2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd","asset":{"id":"2b0bf220-079c-11ee-be56-0242ac120002","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}}}]}'
+        responses.add(responses.GET, url, body=mock_response1, content_type='application/json', status=200)
+        responses.add(responses.GET, url, body=mock_response2, content_type='application/json', status=200)
 
         # Exercise the pager class for this operation
         all_results = []
@@ -1164,22 +1022,10 @@ class TestListDataProductDrafts:
         """
         # Set up a two-page mock response
         url = preprocess_url('/data_product_exchange/v1/data_products/testString/drafts')
-        mock_response1 = '{"next":{"start":"1"},"total_count":2,"limit":1,"drafts":[{"version":"1.0.0","state":"draft","data_product":{"id":"b38df608-d34b-4d58-8136-ed25e6c6684e","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}},"name":"My Data Product","description":"This is a description of My Data Product.","tags":["tags"],"use_cases":[{"id":"id","name":"name","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}}],"types":["data"],"contract_terms":[{"asset":{"id":"2b0bf220-079c-11ee-be56-0242ac120002","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}},"id":"id","documents":[{"url":"url","type":"terms_and_conditions","name":"name","id":"2b0bf220-079c-11ee-be56-0242ac120002","attachment":{"id":"id"},"upload_url":"upload_url"}]}],"is_restricted":false,"id":"2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd","asset":{"id":"2b0bf220-079c-11ee-be56-0242ac120002","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}}}]}'
-        mock_response2 = '{"total_count":2,"limit":1,"drafts":[{"version":"1.0.0","state":"draft","data_product":{"id":"b38df608-d34b-4d58-8136-ed25e6c6684e","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}},"name":"My Data Product","description":"This is a description of My Data Product.","tags":["tags"],"use_cases":[{"id":"id","name":"name","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}}],"types":["data"],"contract_terms":[{"asset":{"id":"2b0bf220-079c-11ee-be56-0242ac120002","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}},"id":"id","documents":[{"url":"url","type":"terms_and_conditions","name":"name","id":"2b0bf220-079c-11ee-be56-0242ac120002","attachment":{"id":"id"},"upload_url":"upload_url"}]}],"is_restricted":false,"id":"2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd","asset":{"id":"2b0bf220-079c-11ee-be56-0242ac120002","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}}}]}'
-        responses.add(
-            responses.GET,
-            url,
-            body=mock_response1,
-            content_type='application/json',
-            status=200,
-        )
-        responses.add(
-            responses.GET,
-            url,
-            body=mock_response2,
-            content_type='application/json',
-            status=200,
-        )
+        mock_response1 = '{"next":{"start":"1"},"total_count":2,"limit":1,"drafts":[{"version":"1.0.0","state":"draft","data_product":{"id":"b38df608-d34b-4d58-8136-ed25e6c6684e","release":{"id":"18bdbde1-918e-4ecf-aa23-6727bf319e14"},"container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}},"name":"My Data Product","description":"This is a description of My Data Product.","tags":["tags"],"use_cases":[{"id":"id","name":"name","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}}],"types":["data"],"contract_terms":[{"asset":{"id":"2b0bf220-079c-11ee-be56-0242ac120002","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}},"id":"id","documents":[{"url":"url","type":"terms_and_conditions","name":"name","id":"2b0bf220-079c-11ee-be56-0242ac120002","attachment":{"id":"id"},"upload_url":"upload_url"}],"error_msg":"error_msg"}],"is_restricted":false,"id":"2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd","asset":{"id":"2b0bf220-079c-11ee-be56-0242ac120002","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}}}]}'
+        mock_response2 = '{"total_count":2,"limit":1,"drafts":[{"version":"1.0.0","state":"draft","data_product":{"id":"b38df608-d34b-4d58-8136-ed25e6c6684e","release":{"id":"18bdbde1-918e-4ecf-aa23-6727bf319e14"},"container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}},"name":"My Data Product","description":"This is a description of My Data Product.","tags":["tags"],"use_cases":[{"id":"id","name":"name","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}}],"types":["data"],"contract_terms":[{"asset":{"id":"2b0bf220-079c-11ee-be56-0242ac120002","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}},"id":"id","documents":[{"url":"url","type":"terms_and_conditions","name":"name","id":"2b0bf220-079c-11ee-be56-0242ac120002","attachment":{"id":"id"},"upload_url":"upload_url"}],"error_msg":"error_msg"}],"is_restricted":false,"id":"2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd","asset":{"id":"2b0bf220-079c-11ee-be56-0242ac120002","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}}}]}'
+        responses.add(responses.GET, url, body=mock_response1, content_type='application/json', status=200)
+        responses.add(responses.GET, url, body=mock_response2, content_type='application/json', status=200)
 
         # Exercise the pager class for this operation
         pager = DataProductDraftsPager(
@@ -1206,14 +1052,8 @@ class TestCreateDataProductDraft:
         """
         # Set up mock
         url = preprocess_url('/data_product_exchange/v1/data_products/testString/drafts')
-        mock_response = '{"version": "1.0.0", "state": "draft", "data_product": {"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "name": "My Data Product", "description": "This is a description of My Data Product.", "tags": ["tags"], "use_cases": [{"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}], "types": ["data"], "contract_terms": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "id": "id", "documents": [{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}]}], "is_restricted": false, "id": "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd", "asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "domain": {"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "parts_out": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}, "type": "data_asset"}, "delivery_methods": [{"id": "09cf5fcc-cb9d-4995-a8e4-16517b25229f", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}]}], "published_by": "published_by", "published_at": "2019-01-01T12:00:00.000Z", "created_by": "created_by", "created_at": "2019-01-01T12:00:00.000Z", "workflows": {"order_access_request": {"task_assignee_users": ["task_assignee_users"]}}}'
-        responses.add(
-            responses.POST,
-            url,
-            body=mock_response,
-            content_type='application/json',
-            status=201,
-        )
+        mock_response = '{"version": "1.0.0", "state": "draft", "data_product": {"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "release": {"id": "18bdbde1-918e-4ecf-aa23-6727bf319e14"}, "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "name": "My Data Product", "description": "This is a description of My Data Product.", "tags": ["tags"], "use_cases": [{"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}], "types": ["data"], "contract_terms": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "id": "id", "documents": [{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}], "error_msg": "error_msg"}], "is_restricted": false, "id": "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd", "asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "domain": {"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "parts_out": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}, "type": "data_asset"}, "delivery_methods": [{"id": "09cf5fcc-cb9d-4995-a8e4-16517b25229f", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}]}], "published_by": "published_by", "published_at": "2019-01-01T12:00:00.000Z", "created_by": "created_by", "created_at": "2019-01-01T12:00:00.000Z", "workflows": {"order_access_request": {"task_assignee_users": ["task_assignee_users"], "pre_approved_users": ["pre_approved_users"], "custom_workflow_definition": {"id": "18bdbde1-918e-4ecf-aa23-6727bf319e14"}}}, "properties": {"anyKey": "anyValue"}}'
+        responses.add(responses.POST, url, body=mock_response, content_type='application/json', status=201)
 
         # Construct a dict representation of a ContainerIdentity model
         container_identity_model = {}
@@ -1224,9 +1064,14 @@ class TestCreateDataProductDraft:
         asset_prototype_model['id'] = '2b0bf220-079c-11ee-be56-0242ac120002'
         asset_prototype_model['container'] = container_identity_model
 
+        # Construct a dict representation of a DataProductDraftVersionRelease model
+        data_product_draft_version_release_model = {}
+        data_product_draft_version_release_model['id'] = '8bf83660-11fe-4427-a72a-8d8359af24e3'
+
         # Construct a dict representation of a DataProductIdentity model
         data_product_identity_model = {}
         data_product_identity_model['id'] = 'b38df608-d34b-4d58-8136-ed25e6c6684e'
+        data_product_identity_model['release'] = data_product_draft_version_release_model
 
         # Construct a dict representation of a ContainerReference model
         container_reference_model = {}
@@ -1262,6 +1107,7 @@ class TestCreateDataProductDraft:
         data_product_contract_terms_model['asset'] = asset_reference_model
         data_product_contract_terms_model['id'] = 'testString'
         data_product_contract_terms_model['documents'] = [contract_terms_document_model]
+        data_product_contract_terms_model['error_msg'] = 'testString'
 
         # Construct a dict representation of a Domain model
         domain_model = {}
@@ -1285,9 +1131,17 @@ class TestCreateDataProductDraft:
         data_product_part_model['asset'] = asset_part_reference_model
         data_product_part_model['delivery_methods'] = [delivery_method_model]
 
+        # Construct a dict representation of a DataProductCustomWorkflowDefinition model
+        data_product_custom_workflow_definition_model = {}
+        data_product_custom_workflow_definition_model['id'] = '18bdbde1-918e-4ecf-aa23-6727bf319e14'
+
         # Construct a dict representation of a DataProductOrderAccessRequest model
         data_product_order_access_request_model = {}
         data_product_order_access_request_model['task_assignee_users'] = ['testString']
+        data_product_order_access_request_model['pre_approved_users'] = ['testString']
+        data_product_order_access_request_model['custom_workflow_definition'] = (
+            data_product_custom_workflow_definition_model
+        )
 
         # Construct a dict representation of a DataProductWorkflows model
         data_product_workflows_model = {}
@@ -1366,14 +1220,8 @@ class TestCreateDataProductDraft:
         """
         # Set up mock
         url = preprocess_url('/data_product_exchange/v1/data_products/testString/drafts')
-        mock_response = '{"version": "1.0.0", "state": "draft", "data_product": {"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "name": "My Data Product", "description": "This is a description of My Data Product.", "tags": ["tags"], "use_cases": [{"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}], "types": ["data"], "contract_terms": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "id": "id", "documents": [{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}]}], "is_restricted": false, "id": "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd", "asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "domain": {"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "parts_out": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}, "type": "data_asset"}, "delivery_methods": [{"id": "09cf5fcc-cb9d-4995-a8e4-16517b25229f", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}]}], "published_by": "published_by", "published_at": "2019-01-01T12:00:00.000Z", "created_by": "created_by", "created_at": "2019-01-01T12:00:00.000Z", "workflows": {"order_access_request": {"task_assignee_users": ["task_assignee_users"]}}}'
-        responses.add(
-            responses.POST,
-            url,
-            body=mock_response,
-            content_type='application/json',
-            status=201,
-        )
+        mock_response = '{"version": "1.0.0", "state": "draft", "data_product": {"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "release": {"id": "18bdbde1-918e-4ecf-aa23-6727bf319e14"}, "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "name": "My Data Product", "description": "This is a description of My Data Product.", "tags": ["tags"], "use_cases": [{"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}], "types": ["data"], "contract_terms": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "id": "id", "documents": [{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}], "error_msg": "error_msg"}], "is_restricted": false, "id": "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd", "asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "domain": {"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "parts_out": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}, "type": "data_asset"}, "delivery_methods": [{"id": "09cf5fcc-cb9d-4995-a8e4-16517b25229f", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}]}], "published_by": "published_by", "published_at": "2019-01-01T12:00:00.000Z", "created_by": "created_by", "created_at": "2019-01-01T12:00:00.000Z", "workflows": {"order_access_request": {"task_assignee_users": ["task_assignee_users"], "pre_approved_users": ["pre_approved_users"], "custom_workflow_definition": {"id": "18bdbde1-918e-4ecf-aa23-6727bf319e14"}}}, "properties": {"anyKey": "anyValue"}}'
+        responses.add(responses.POST, url, body=mock_response, content_type='application/json', status=201)
 
         # Construct a dict representation of a ContainerIdentity model
         container_identity_model = {}
@@ -1384,9 +1232,14 @@ class TestCreateDataProductDraft:
         asset_prototype_model['id'] = '2b0bf220-079c-11ee-be56-0242ac120002'
         asset_prototype_model['container'] = container_identity_model
 
+        # Construct a dict representation of a DataProductDraftVersionRelease model
+        data_product_draft_version_release_model = {}
+        data_product_draft_version_release_model['id'] = '8bf83660-11fe-4427-a72a-8d8359af24e3'
+
         # Construct a dict representation of a DataProductIdentity model
         data_product_identity_model = {}
         data_product_identity_model['id'] = 'b38df608-d34b-4d58-8136-ed25e6c6684e'
+        data_product_identity_model['release'] = data_product_draft_version_release_model
 
         # Construct a dict representation of a ContainerReference model
         container_reference_model = {}
@@ -1422,6 +1275,7 @@ class TestCreateDataProductDraft:
         data_product_contract_terms_model['asset'] = asset_reference_model
         data_product_contract_terms_model['id'] = 'testString'
         data_product_contract_terms_model['documents'] = [contract_terms_document_model]
+        data_product_contract_terms_model['error_msg'] = 'testString'
 
         # Construct a dict representation of a Domain model
         domain_model = {}
@@ -1445,9 +1299,17 @@ class TestCreateDataProductDraft:
         data_product_part_model['asset'] = asset_part_reference_model
         data_product_part_model['delivery_methods'] = [delivery_method_model]
 
+        # Construct a dict representation of a DataProductCustomWorkflowDefinition model
+        data_product_custom_workflow_definition_model = {}
+        data_product_custom_workflow_definition_model['id'] = '18bdbde1-918e-4ecf-aa23-6727bf319e14'
+
         # Construct a dict representation of a DataProductOrderAccessRequest model
         data_product_order_access_request_model = {}
         data_product_order_access_request_model['task_assignee_users'] = ['testString']
+        data_product_order_access_request_model['pre_approved_users'] = ['testString']
+        data_product_order_access_request_model['custom_workflow_definition'] = (
+            data_product_custom_workflow_definition_model
+        )
 
         # Construct a dict representation of a DataProductWorkflows model
         data_product_workflows_model = {}
@@ -1471,10 +1333,7 @@ class TestCreateDataProductDraft:
         workflows = data_product_workflows_model
 
         # Pass in all but one required param and check for a ValueError
-        req_param_dict = {
-            "data_product_id": data_product_id,
-            "asset": asset,
-        }
+        req_param_dict = {"data_product_id": data_product_id, "asset": asset}
         for param in req_param_dict.keys():
             req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
             with pytest.raises(ValueError):
@@ -1505,17 +1364,7 @@ class TestCreateDraftContractTermsDocument:
             '/data_product_exchange/v1/data_products/testString/drafts/testString/contract_terms/testString/documents'
         )
         mock_response = '{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}'
-        responses.add(
-            responses.POST,
-            url,
-            body=mock_response,
-            content_type='application/json',
-            status=201,
-        )
-
-        # Construct a dict representation of a ContractTermsDocumentAttachment model
-        contract_terms_document_attachment_model = {}
-        contract_terms_document_attachment_model['id'] = 'testString'
+        responses.add(responses.POST, url, body=mock_response, content_type='application/json', status=201)
 
         # Set up parameter values
         data_product_id = 'testString'
@@ -1523,23 +1372,11 @@ class TestCreateDraftContractTermsDocument:
         contract_terms_id = 'testString'
         type = 'terms_and_conditions'
         name = 'Terms and conditions document'
-        id = 'b38df608-d34b-4d58-8136-ed25e6c6684e'
         url = 'testString'
-        attachment = contract_terms_document_attachment_model
-        upload_url = 'testString'
 
         # Invoke method
         response = _service.create_draft_contract_terms_document(
-            data_product_id,
-            draft_id,
-            contract_terms_id,
-            type,
-            name,
-            id,
-            url=url,
-            attachment=attachment,
-            upload_url=upload_url,
-            headers={},
+            data_product_id, draft_id, contract_terms_id, type, name, url=url, headers={}
         )
 
         # Check for correct operation
@@ -1549,10 +1386,7 @@ class TestCreateDraftContractTermsDocument:
         req_body = json.loads(str(responses.calls[0].request.body, 'utf-8'))
         assert req_body['type'] == 'terms_and_conditions'
         assert req_body['name'] == 'Terms and conditions document'
-        assert req_body['id'] == 'b38df608-d34b-4d58-8136-ed25e6c6684e'
         assert req_body['url'] == 'testString'
-        assert req_body['attachment'] == contract_terms_document_attachment_model
-        assert req_body['upload_url'] == 'testString'
 
     def test_create_draft_contract_terms_document_all_params_with_retries(self):
         # Enable retries and run test_create_draft_contract_terms_document_all_params.
@@ -1573,17 +1407,7 @@ class TestCreateDraftContractTermsDocument:
             '/data_product_exchange/v1/data_products/testString/drafts/testString/contract_terms/testString/documents'
         )
         mock_response = '{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}'
-        responses.add(
-            responses.POST,
-            url,
-            body=mock_response,
-            content_type='application/json',
-            status=201,
-        )
-
-        # Construct a dict representation of a ContractTermsDocumentAttachment model
-        contract_terms_document_attachment_model = {}
-        contract_terms_document_attachment_model['id'] = 'testString'
+        responses.add(responses.POST, url, body=mock_response, content_type='application/json', status=201)
 
         # Set up parameter values
         data_product_id = 'testString'
@@ -1591,10 +1415,7 @@ class TestCreateDraftContractTermsDocument:
         contract_terms_id = 'testString'
         type = 'terms_and_conditions'
         name = 'Terms and conditions document'
-        id = 'b38df608-d34b-4d58-8136-ed25e6c6684e'
         url = 'testString'
-        attachment = contract_terms_document_attachment_model
-        upload_url = 'testString'
 
         # Pass in all but one required param and check for a ValueError
         req_param_dict = {
@@ -1603,7 +1424,6 @@ class TestCreateDraftContractTermsDocument:
             "contract_terms_id": contract_terms_id,
             "type": type,
             "name": name,
-            "id": id,
         }
         for param in req_param_dict.keys():
             req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
@@ -1632,25 +1452,15 @@ class TestGetDataProductDraft:
         """
         # Set up mock
         url = preprocess_url('/data_product_exchange/v1/data_products/testString/drafts/testString')
-        mock_response = '{"version": "1.0.0", "state": "draft", "data_product": {"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "name": "My Data Product", "description": "This is a description of My Data Product.", "tags": ["tags"], "use_cases": [{"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}], "types": ["data"], "contract_terms": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "id": "id", "documents": [{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}]}], "is_restricted": false, "id": "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd", "asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "domain": {"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "parts_out": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}, "type": "data_asset"}, "delivery_methods": [{"id": "09cf5fcc-cb9d-4995-a8e4-16517b25229f", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}]}], "published_by": "published_by", "published_at": "2019-01-01T12:00:00.000Z", "created_by": "created_by", "created_at": "2019-01-01T12:00:00.000Z", "workflows": {"order_access_request": {"task_assignee_users": ["task_assignee_users"]}}}'
-        responses.add(
-            responses.GET,
-            url,
-            body=mock_response,
-            content_type='application/json',
-            status=200,
-        )
+        mock_response = '{"version": "1.0.0", "state": "draft", "data_product": {"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "release": {"id": "18bdbde1-918e-4ecf-aa23-6727bf319e14"}, "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "name": "My Data Product", "description": "This is a description of My Data Product.", "tags": ["tags"], "use_cases": [{"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}], "types": ["data"], "contract_terms": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "id": "id", "documents": [{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}], "error_msg": "error_msg"}], "is_restricted": false, "id": "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd", "asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "domain": {"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "parts_out": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}, "type": "data_asset"}, "delivery_methods": [{"id": "09cf5fcc-cb9d-4995-a8e4-16517b25229f", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}]}], "published_by": "published_by", "published_at": "2019-01-01T12:00:00.000Z", "created_by": "created_by", "created_at": "2019-01-01T12:00:00.000Z", "workflows": {"order_access_request": {"task_assignee_users": ["task_assignee_users"], "pre_approved_users": ["pre_approved_users"], "custom_workflow_definition": {"id": "18bdbde1-918e-4ecf-aa23-6727bf319e14"}}}, "properties": {"anyKey": "anyValue"}}'
+        responses.add(responses.GET, url, body=mock_response, content_type='application/json', status=200)
 
         # Set up parameter values
         data_product_id = 'testString'
         draft_id = 'testString'
 
         # Invoke method
-        response = _service.get_data_product_draft(
-            data_product_id,
-            draft_id,
-            headers={},
-        )
+        response = _service.get_data_product_draft(data_product_id, draft_id, headers={})
 
         # Check for correct operation
         assert len(responses.calls) == 1
@@ -1672,24 +1482,15 @@ class TestGetDataProductDraft:
         """
         # Set up mock
         url = preprocess_url('/data_product_exchange/v1/data_products/testString/drafts/testString')
-        mock_response = '{"version": "1.0.0", "state": "draft", "data_product": {"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "name": "My Data Product", "description": "This is a description of My Data Product.", "tags": ["tags"], "use_cases": [{"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}], "types": ["data"], "contract_terms": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "id": "id", "documents": [{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}]}], "is_restricted": false, "id": "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd", "asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "domain": {"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "parts_out": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}, "type": "data_asset"}, "delivery_methods": [{"id": "09cf5fcc-cb9d-4995-a8e4-16517b25229f", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}]}], "published_by": "published_by", "published_at": "2019-01-01T12:00:00.000Z", "created_by": "created_by", "created_at": "2019-01-01T12:00:00.000Z", "workflows": {"order_access_request": {"task_assignee_users": ["task_assignee_users"]}}}'
-        responses.add(
-            responses.GET,
-            url,
-            body=mock_response,
-            content_type='application/json',
-            status=200,
-        )
+        mock_response = '{"version": "1.0.0", "state": "draft", "data_product": {"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "release": {"id": "18bdbde1-918e-4ecf-aa23-6727bf319e14"}, "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "name": "My Data Product", "description": "This is a description of My Data Product.", "tags": ["tags"], "use_cases": [{"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}], "types": ["data"], "contract_terms": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "id": "id", "documents": [{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}], "error_msg": "error_msg"}], "is_restricted": false, "id": "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd", "asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "domain": {"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "parts_out": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}, "type": "data_asset"}, "delivery_methods": [{"id": "09cf5fcc-cb9d-4995-a8e4-16517b25229f", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}]}], "published_by": "published_by", "published_at": "2019-01-01T12:00:00.000Z", "created_by": "created_by", "created_at": "2019-01-01T12:00:00.000Z", "workflows": {"order_access_request": {"task_assignee_users": ["task_assignee_users"], "pre_approved_users": ["pre_approved_users"], "custom_workflow_definition": {"id": "18bdbde1-918e-4ecf-aa23-6727bf319e14"}}}, "properties": {"anyKey": "anyValue"}}'
+        responses.add(responses.GET, url, body=mock_response, content_type='application/json', status=200)
 
         # Set up parameter values
         data_product_id = 'testString'
         draft_id = 'testString'
 
         # Pass in all but one required param and check for a ValueError
-        req_param_dict = {
-            "data_product_id": data_product_id,
-            "draft_id": draft_id,
-        }
+        req_param_dict = {"data_product_id": data_product_id, "draft_id": draft_id}
         for param in req_param_dict.keys():
             req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
             with pytest.raises(ValueError):
@@ -1717,22 +1518,14 @@ class TestDeleteDataProductDraft:
         """
         # Set up mock
         url = preprocess_url('/data_product_exchange/v1/data_products/testString/drafts/testString')
-        responses.add(
-            responses.DELETE,
-            url,
-            status=204,
-        )
+        responses.add(responses.DELETE, url, status=204)
 
         # Set up parameter values
         data_product_id = 'testString'
         draft_id = 'testString'
 
         # Invoke method
-        response = _service.delete_data_product_draft(
-            data_product_id,
-            draft_id,
-            headers={},
-        )
+        response = _service.delete_data_product_draft(data_product_id, draft_id, headers={})
 
         # Check for correct operation
         assert len(responses.calls) == 1
@@ -1754,21 +1547,14 @@ class TestDeleteDataProductDraft:
         """
         # Set up mock
         url = preprocess_url('/data_product_exchange/v1/data_products/testString/drafts/testString')
-        responses.add(
-            responses.DELETE,
-            url,
-            status=204,
-        )
+        responses.add(responses.DELETE, url, status=204)
 
         # Set up parameter values
         data_product_id = 'testString'
         draft_id = 'testString'
 
         # Pass in all but one required param and check for a ValueError
-        req_param_dict = {
-            "data_product_id": data_product_id,
-            "draft_id": draft_id,
-        }
+        req_param_dict = {"data_product_id": data_product_id, "draft_id": draft_id}
         for param in req_param_dict.keys():
             req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
             with pytest.raises(ValueError):
@@ -1796,14 +1582,8 @@ class TestUpdateDataProductDraft:
         """
         # Set up mock
         url = preprocess_url('/data_product_exchange/v1/data_products/testString/drafts/testString')
-        mock_response = '{"version": "1.0.0", "state": "draft", "data_product": {"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "name": "My Data Product", "description": "This is a description of My Data Product.", "tags": ["tags"], "use_cases": [{"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}], "types": ["data"], "contract_terms": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "id": "id", "documents": [{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}]}], "is_restricted": false, "id": "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd", "asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "domain": {"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "parts_out": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}, "type": "data_asset"}, "delivery_methods": [{"id": "09cf5fcc-cb9d-4995-a8e4-16517b25229f", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}]}], "published_by": "published_by", "published_at": "2019-01-01T12:00:00.000Z", "created_by": "created_by", "created_at": "2019-01-01T12:00:00.000Z", "workflows": {"order_access_request": {"task_assignee_users": ["task_assignee_users"]}}}'
-        responses.add(
-            responses.PATCH,
-            url,
-            body=mock_response,
-            content_type='application/json',
-            status=200,
-        )
+        mock_response = '{"version": "1.0.0", "state": "draft", "data_product": {"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "release": {"id": "18bdbde1-918e-4ecf-aa23-6727bf319e14"}, "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "name": "My Data Product", "description": "This is a description of My Data Product.", "tags": ["tags"], "use_cases": [{"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}], "types": ["data"], "contract_terms": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "id": "id", "documents": [{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}], "error_msg": "error_msg"}], "is_restricted": false, "id": "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd", "asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "domain": {"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "parts_out": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}, "type": "data_asset"}, "delivery_methods": [{"id": "09cf5fcc-cb9d-4995-a8e4-16517b25229f", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}]}], "published_by": "published_by", "published_at": "2019-01-01T12:00:00.000Z", "created_by": "created_by", "created_at": "2019-01-01T12:00:00.000Z", "workflows": {"order_access_request": {"task_assignee_users": ["task_assignee_users"], "pre_approved_users": ["pre_approved_users"], "custom_workflow_definition": {"id": "18bdbde1-918e-4ecf-aa23-6727bf319e14"}}}, "properties": {"anyKey": "anyValue"}}'
+        responses.add(responses.PATCH, url, body=mock_response, content_type='application/json', status=200)
 
         # Construct a dict representation of a JsonPatchOperation model
         json_patch_operation_model = {}
@@ -1818,12 +1598,7 @@ class TestUpdateDataProductDraft:
         json_patch_instructions = [json_patch_operation_model]
 
         # Invoke method
-        response = _service.update_data_product_draft(
-            data_product_id,
-            draft_id,
-            json_patch_instructions,
-            headers={},
-        )
+        response = _service.update_data_product_draft(data_product_id, draft_id, json_patch_instructions, headers={})
 
         # Check for correct operation
         assert len(responses.calls) == 1
@@ -1848,14 +1623,8 @@ class TestUpdateDataProductDraft:
         """
         # Set up mock
         url = preprocess_url('/data_product_exchange/v1/data_products/testString/drafts/testString')
-        mock_response = '{"version": "1.0.0", "state": "draft", "data_product": {"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "name": "My Data Product", "description": "This is a description of My Data Product.", "tags": ["tags"], "use_cases": [{"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}], "types": ["data"], "contract_terms": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "id": "id", "documents": [{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}]}], "is_restricted": false, "id": "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd", "asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "domain": {"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "parts_out": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}, "type": "data_asset"}, "delivery_methods": [{"id": "09cf5fcc-cb9d-4995-a8e4-16517b25229f", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}]}], "published_by": "published_by", "published_at": "2019-01-01T12:00:00.000Z", "created_by": "created_by", "created_at": "2019-01-01T12:00:00.000Z", "workflows": {"order_access_request": {"task_assignee_users": ["task_assignee_users"]}}}'
-        responses.add(
-            responses.PATCH,
-            url,
-            body=mock_response,
-            content_type='application/json',
-            status=200,
-        )
+        mock_response = '{"version": "1.0.0", "state": "draft", "data_product": {"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "release": {"id": "18bdbde1-918e-4ecf-aa23-6727bf319e14"}, "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "name": "My Data Product", "description": "This is a description of My Data Product.", "tags": ["tags"], "use_cases": [{"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}], "types": ["data"], "contract_terms": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "id": "id", "documents": [{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}], "error_msg": "error_msg"}], "is_restricted": false, "id": "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd", "asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "domain": {"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "parts_out": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}, "type": "data_asset"}, "delivery_methods": [{"id": "09cf5fcc-cb9d-4995-a8e4-16517b25229f", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}]}], "published_by": "published_by", "published_at": "2019-01-01T12:00:00.000Z", "created_by": "created_by", "created_at": "2019-01-01T12:00:00.000Z", "workflows": {"order_access_request": {"task_assignee_users": ["task_assignee_users"], "pre_approved_users": ["pre_approved_users"], "custom_workflow_definition": {"id": "18bdbde1-918e-4ecf-aa23-6727bf319e14"}}}, "properties": {"anyKey": "anyValue"}}'
+        responses.add(responses.PATCH, url, body=mock_response, content_type='application/json', status=200)
 
         # Construct a dict representation of a JsonPatchOperation model
         json_patch_operation_model = {}
@@ -1905,13 +1674,7 @@ class TestGetDraftContractTermsDocument:
             '/data_product_exchange/v1/data_products/testString/drafts/testString/contract_terms/testString/documents/testString'
         )
         mock_response = '{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}'
-        responses.add(
-            responses.GET,
-            url,
-            body=mock_response,
-            content_type='application/json',
-            status=200,
-        )
+        responses.add(responses.GET, url, body=mock_response, content_type='application/json', status=200)
 
         # Set up parameter values
         data_product_id = 'testString'
@@ -1921,11 +1684,7 @@ class TestGetDraftContractTermsDocument:
 
         # Invoke method
         response = _service.get_draft_contract_terms_document(
-            data_product_id,
-            draft_id,
-            contract_terms_id,
-            document_id,
-            headers={},
+            data_product_id, draft_id, contract_terms_id, document_id, headers={}
         )
 
         # Check for correct operation
@@ -1951,13 +1710,7 @@ class TestGetDraftContractTermsDocument:
             '/data_product_exchange/v1/data_products/testString/drafts/testString/contract_terms/testString/documents/testString'
         )
         mock_response = '{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}'
-        responses.add(
-            responses.GET,
-            url,
-            body=mock_response,
-            content_type='application/json',
-            status=200,
-        )
+        responses.add(responses.GET, url, body=mock_response, content_type='application/json', status=200)
 
         # Set up parameter values
         data_product_id = 'testString'
@@ -2001,11 +1754,7 @@ class TestDeleteDraftContractTermsDocument:
         url = preprocess_url(
             '/data_product_exchange/v1/data_products/testString/drafts/testString/contract_terms/testString/documents/testString'
         )
-        responses.add(
-            responses.DELETE,
-            url,
-            status=204,
-        )
+        responses.add(responses.DELETE, url, status=204)
 
         # Set up parameter values
         data_product_id = 'testString'
@@ -2015,11 +1764,7 @@ class TestDeleteDraftContractTermsDocument:
 
         # Invoke method
         response = _service.delete_draft_contract_terms_document(
-            data_product_id,
-            draft_id,
-            contract_terms_id,
-            document_id,
-            headers={},
+            data_product_id, draft_id, contract_terms_id, document_id, headers={}
         )
 
         # Check for correct operation
@@ -2044,11 +1789,7 @@ class TestDeleteDraftContractTermsDocument:
         url = preprocess_url(
             '/data_product_exchange/v1/data_products/testString/drafts/testString/contract_terms/testString/documents/testString'
         )
-        responses.add(
-            responses.DELETE,
-            url,
-            status=204,
-        )
+        responses.add(responses.DELETE, url, status=204)
 
         # Set up parameter values
         data_product_id = 'testString'
@@ -2093,13 +1834,7 @@ class TestUpdateDraftContractTermsDocument:
             '/data_product_exchange/v1/data_products/testString/drafts/testString/contract_terms/testString/documents/testString'
         )
         mock_response = '{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}'
-        responses.add(
-            responses.PATCH,
-            url,
-            body=mock_response,
-            content_type='application/json',
-            status=200,
-        )
+        responses.add(responses.PATCH, url, body=mock_response, content_type='application/json', status=200)
 
         # Construct a dict representation of a JsonPatchOperation model
         json_patch_operation_model = {}
@@ -2117,12 +1852,7 @@ class TestUpdateDraftContractTermsDocument:
 
         # Invoke method
         response = _service.update_draft_contract_terms_document(
-            data_product_id,
-            draft_id,
-            contract_terms_id,
-            document_id,
-            json_patch_instructions,
-            headers={},
+            data_product_id, draft_id, contract_terms_id, document_id, json_patch_instructions, headers={}
         )
 
         # Check for correct operation
@@ -2151,13 +1881,7 @@ class TestUpdateDraftContractTermsDocument:
             '/data_product_exchange/v1/data_products/testString/drafts/testString/contract_terms/testString/documents/testString'
         )
         mock_response = '{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}'
-        responses.add(
-            responses.PATCH,
-            url,
-            body=mock_response,
-            content_type='application/json',
-            status=200,
-        )
+        responses.add(responses.PATCH, url, body=mock_response, content_type='application/json', status=200)
 
         # Construct a dict representation of a JsonPatchOperation model
         json_patch_operation_model = {}
@@ -2208,25 +1932,15 @@ class TestPublishDataProductDraft:
         """
         # Set up mock
         url = preprocess_url('/data_product_exchange/v1/data_products/testString/drafts/testString/publish')
-        mock_response = '{"version": "1.0.0", "state": "draft", "data_product": {"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "name": "My Data Product", "description": "This is a description of My Data Product.", "tags": ["tags"], "use_cases": [{"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}], "types": ["data"], "contract_terms": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "id": "id", "documents": [{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}]}], "is_restricted": false, "id": "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd", "asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "domain": {"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "parts_out": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}, "type": "data_asset"}, "delivery_methods": [{"id": "09cf5fcc-cb9d-4995-a8e4-16517b25229f", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}]}], "published_by": "published_by", "published_at": "2019-01-01T12:00:00.000Z", "created_by": "created_by", "created_at": "2019-01-01T12:00:00.000Z", "workflows": {"order_access_request": {"task_assignee_users": ["task_assignee_users"]}}}'
-        responses.add(
-            responses.POST,
-            url,
-            body=mock_response,
-            content_type='application/json',
-            status=200,
-        )
+        mock_response = '{"version": "1.0.0", "state": "draft", "data_product": {"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "release": {"id": "18bdbde1-918e-4ecf-aa23-6727bf319e14"}, "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "name": "My Data Product", "description": "This is a description of My Data Product.", "tags": ["tags"], "use_cases": [{"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}], "types": ["data"], "contract_terms": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "id": "id", "documents": [{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}], "error_msg": "error_msg"}], "is_restricted": false, "id": "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd", "asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "domain": {"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "parts_out": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}, "type": "data_asset"}, "delivery_methods": [{"id": "09cf5fcc-cb9d-4995-a8e4-16517b25229f", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}]}], "published_by": "published_by", "published_at": "2019-01-01T12:00:00.000Z", "created_by": "created_by", "created_at": "2019-01-01T12:00:00.000Z", "workflows": {"order_access_request": {"task_assignee_users": ["task_assignee_users"], "pre_approved_users": ["pre_approved_users"], "custom_workflow_definition": {"id": "18bdbde1-918e-4ecf-aa23-6727bf319e14"}}}, "properties": {"anyKey": "anyValue"}}'
+        responses.add(responses.POST, url, body=mock_response, content_type='application/json', status=200)
 
         # Set up parameter values
         data_product_id = 'testString'
         draft_id = 'testString'
 
         # Invoke method
-        response = _service.publish_data_product_draft(
-            data_product_id,
-            draft_id,
-            headers={},
-        )
+        response = _service.publish_data_product_draft(data_product_id, draft_id, headers={})
 
         # Check for correct operation
         assert len(responses.calls) == 1
@@ -2248,24 +1962,15 @@ class TestPublishDataProductDraft:
         """
         # Set up mock
         url = preprocess_url('/data_product_exchange/v1/data_products/testString/drafts/testString/publish')
-        mock_response = '{"version": "1.0.0", "state": "draft", "data_product": {"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "name": "My Data Product", "description": "This is a description of My Data Product.", "tags": ["tags"], "use_cases": [{"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}], "types": ["data"], "contract_terms": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "id": "id", "documents": [{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}]}], "is_restricted": false, "id": "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd", "asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "domain": {"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "parts_out": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}, "type": "data_asset"}, "delivery_methods": [{"id": "09cf5fcc-cb9d-4995-a8e4-16517b25229f", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}]}], "published_by": "published_by", "published_at": "2019-01-01T12:00:00.000Z", "created_by": "created_by", "created_at": "2019-01-01T12:00:00.000Z", "workflows": {"order_access_request": {"task_assignee_users": ["task_assignee_users"]}}}'
-        responses.add(
-            responses.POST,
-            url,
-            body=mock_response,
-            content_type='application/json',
-            status=200,
-        )
+        mock_response = '{"version": "1.0.0", "state": "draft", "data_product": {"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "release": {"id": "18bdbde1-918e-4ecf-aa23-6727bf319e14"}, "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "name": "My Data Product", "description": "This is a description of My Data Product.", "tags": ["tags"], "use_cases": [{"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}], "types": ["data"], "contract_terms": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "id": "id", "documents": [{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}], "error_msg": "error_msg"}], "is_restricted": false, "id": "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd", "asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "domain": {"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "parts_out": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}, "type": "data_asset"}, "delivery_methods": [{"id": "09cf5fcc-cb9d-4995-a8e4-16517b25229f", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}]}], "published_by": "published_by", "published_at": "2019-01-01T12:00:00.000Z", "created_by": "created_by", "created_at": "2019-01-01T12:00:00.000Z", "workflows": {"order_access_request": {"task_assignee_users": ["task_assignee_users"], "pre_approved_users": ["pre_approved_users"], "custom_workflow_definition": {"id": "18bdbde1-918e-4ecf-aa23-6727bf319e14"}}}, "properties": {"anyKey": "anyValue"}}'
+        responses.add(responses.POST, url, body=mock_response, content_type='application/json', status=200)
 
         # Set up parameter values
         data_product_id = 'testString'
         draft_id = 'testString'
 
         # Pass in all but one required param and check for a ValueError
-        req_param_dict = {
-            "data_product_id": data_product_id,
-            "draft_id": draft_id,
-        }
+        req_param_dict = {"data_product_id": data_product_id, "draft_id": draft_id}
         for param in req_param_dict.keys():
             req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
             with pytest.raises(ValueError):
@@ -2303,9 +2008,7 @@ class TestNewInstance:
         """
         os.environ['TEST_SERVICE_AUTH_TYPE'] = 'noAuth'
 
-        service = DataProductHubApiServiceV1.new_instance(
-            service_name='TEST_SERVICE',
-        )
+        service = DataProductHubApiServiceV1.new_instance(service_name='TEST_SERVICE')
 
         assert service is not None
         assert isinstance(service, DataProductHubApiServiceV1)
@@ -2315,9 +2018,7 @@ class TestNewInstance:
         new_instance_without_authenticator()
         """
         with pytest.raises(ValueError, match='authenticator must be provided'):
-            service = DataProductHubApiServiceV1.new_instance(
-                service_name='TEST_SERVICE_NOT_FOUND',
-            )
+            service = DataProductHubApiServiceV1.new_instance(service_name='TEST_SERVICE_NOT_FOUND')
 
 
 class TestGetDataProductRelease:
@@ -2332,29 +2033,26 @@ class TestGetDataProductRelease:
         """
         # Set up mock
         url = preprocess_url('/data_product_exchange/v1/data_products/testString/releases/testString')
-        mock_response = '{"version": "1.0.0", "state": "draft", "data_product": {"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "name": "My Data Product", "description": "This is a description of My Data Product.", "tags": ["tags"], "use_cases": [{"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}], "types": ["data"], "contract_terms": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "id": "id", "documents": [{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}]}], "is_restricted": false, "id": "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd", "asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "domain": {"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "parts_out": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}, "type": "data_asset"}, "delivery_methods": [{"id": "09cf5fcc-cb9d-4995-a8e4-16517b25229f", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}]}], "published_by": "published_by", "published_at": "2019-01-01T12:00:00.000Z", "created_by": "created_by", "created_at": "2019-01-01T12:00:00.000Z", "workflows": {"order_access_request": {"task_assignee_users": ["task_assignee_users"]}}}'
-        responses.add(
-            responses.GET,
-            url,
-            body=mock_response,
-            content_type='application/json',
-            status=200,
-        )
+        mock_response = '{"version": "1.0.0", "state": "draft", "data_product": {"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "release": {"id": "18bdbde1-918e-4ecf-aa23-6727bf319e14"}, "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "name": "My Data Product", "description": "This is a description of My Data Product.", "tags": ["tags"], "use_cases": [{"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}], "types": ["data"], "contract_terms": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "id": "id", "documents": [{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}], "error_msg": "error_msg"}], "is_restricted": false, "id": "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd", "asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "domain": {"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "parts_out": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}, "type": "data_asset"}, "delivery_methods": [{"id": "09cf5fcc-cb9d-4995-a8e4-16517b25229f", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}]}], "published_by": "published_by", "published_at": "2019-01-01T12:00:00.000Z", "created_by": "created_by", "created_at": "2019-01-01T12:00:00.000Z", "workflows": {"order_access_request": {"task_assignee_users": ["task_assignee_users"], "pre_approved_users": ["pre_approved_users"], "custom_workflow_definition": {"id": "18bdbde1-918e-4ecf-aa23-6727bf319e14"}}}, "properties": {"anyKey": "anyValue"}}'
+        responses.add(responses.GET, url, body=mock_response, content_type='application/json', status=200)
 
         # Set up parameter values
         data_product_id = 'testString'
         release_id = 'testString'
+        check_caller_approval = False
 
         # Invoke method
         response = _service.get_data_product_release(
-            data_product_id,
-            release_id,
-            headers={},
+            data_product_id, release_id, check_caller_approval=check_caller_approval, headers={}
         )
 
         # Check for correct operation
         assert len(responses.calls) == 1
         assert response.status_code == 200
+        # Validate query params
+        query_string = responses.calls[0].request.url.split('?', 1)[1]
+        query_string = urllib.parse.unquote_plus(query_string)
+        assert 'check_caller_approval={}'.format('true' if check_caller_approval else 'false') in query_string
 
     def test_get_data_product_release_all_params_with_retries(self):
         # Enable retries and run test_get_data_product_release_all_params.
@@ -2366,30 +2064,51 @@ class TestGetDataProductRelease:
         self.test_get_data_product_release_all_params()
 
     @responses.activate
+    def test_get_data_product_release_required_params(self):
+        """
+        test_get_data_product_release_required_params()
+        """
+        # Set up mock
+        url = preprocess_url('/data_product_exchange/v1/data_products/testString/releases/testString')
+        mock_response = '{"version": "1.0.0", "state": "draft", "data_product": {"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "release": {"id": "18bdbde1-918e-4ecf-aa23-6727bf319e14"}, "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "name": "My Data Product", "description": "This is a description of My Data Product.", "tags": ["tags"], "use_cases": [{"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}], "types": ["data"], "contract_terms": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "id": "id", "documents": [{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}], "error_msg": "error_msg"}], "is_restricted": false, "id": "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd", "asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "domain": {"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "parts_out": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}, "type": "data_asset"}, "delivery_methods": [{"id": "09cf5fcc-cb9d-4995-a8e4-16517b25229f", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}]}], "published_by": "published_by", "published_at": "2019-01-01T12:00:00.000Z", "created_by": "created_by", "created_at": "2019-01-01T12:00:00.000Z", "workflows": {"order_access_request": {"task_assignee_users": ["task_assignee_users"], "pre_approved_users": ["pre_approved_users"], "custom_workflow_definition": {"id": "18bdbde1-918e-4ecf-aa23-6727bf319e14"}}}, "properties": {"anyKey": "anyValue"}}'
+        responses.add(responses.GET, url, body=mock_response, content_type='application/json', status=200)
+
+        # Set up parameter values
+        data_product_id = 'testString'
+        release_id = 'testString'
+
+        # Invoke method
+        response = _service.get_data_product_release(data_product_id, release_id, headers={})
+
+        # Check for correct operation
+        assert len(responses.calls) == 1
+        assert response.status_code == 200
+
+    def test_get_data_product_release_required_params_with_retries(self):
+        # Enable retries and run test_get_data_product_release_required_params.
+        _service.enable_retries()
+        self.test_get_data_product_release_required_params()
+
+        # Disable retries and run test_get_data_product_release_required_params.
+        _service.disable_retries()
+        self.test_get_data_product_release_required_params()
+
+    @responses.activate
     def test_get_data_product_release_value_error(self):
         """
         test_get_data_product_release_value_error()
         """
         # Set up mock
         url = preprocess_url('/data_product_exchange/v1/data_products/testString/releases/testString')
-        mock_response = '{"version": "1.0.0", "state": "draft", "data_product": {"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "name": "My Data Product", "description": "This is a description of My Data Product.", "tags": ["tags"], "use_cases": [{"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}], "types": ["data"], "contract_terms": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "id": "id", "documents": [{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}]}], "is_restricted": false, "id": "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd", "asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "domain": {"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "parts_out": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}, "type": "data_asset"}, "delivery_methods": [{"id": "09cf5fcc-cb9d-4995-a8e4-16517b25229f", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}]}], "published_by": "published_by", "published_at": "2019-01-01T12:00:00.000Z", "created_by": "created_by", "created_at": "2019-01-01T12:00:00.000Z", "workflows": {"order_access_request": {"task_assignee_users": ["task_assignee_users"]}}}'
-        responses.add(
-            responses.GET,
-            url,
-            body=mock_response,
-            content_type='application/json',
-            status=200,
-        )
+        mock_response = '{"version": "1.0.0", "state": "draft", "data_product": {"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "release": {"id": "18bdbde1-918e-4ecf-aa23-6727bf319e14"}, "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "name": "My Data Product", "description": "This is a description of My Data Product.", "tags": ["tags"], "use_cases": [{"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}], "types": ["data"], "contract_terms": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "id": "id", "documents": [{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}], "error_msg": "error_msg"}], "is_restricted": false, "id": "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd", "asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "domain": {"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "parts_out": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}, "type": "data_asset"}, "delivery_methods": [{"id": "09cf5fcc-cb9d-4995-a8e4-16517b25229f", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}]}], "published_by": "published_by", "published_at": "2019-01-01T12:00:00.000Z", "created_by": "created_by", "created_at": "2019-01-01T12:00:00.000Z", "workflows": {"order_access_request": {"task_assignee_users": ["task_assignee_users"], "pre_approved_users": ["pre_approved_users"], "custom_workflow_definition": {"id": "18bdbde1-918e-4ecf-aa23-6727bf319e14"}}}, "properties": {"anyKey": "anyValue"}}'
+        responses.add(responses.GET, url, body=mock_response, content_type='application/json', status=200)
 
         # Set up parameter values
         data_product_id = 'testString'
         release_id = 'testString'
 
         # Pass in all but one required param and check for a ValueError
-        req_param_dict = {
-            "data_product_id": data_product_id,
-            "release_id": release_id,
-        }
+        req_param_dict = {"data_product_id": data_product_id, "release_id": release_id}
         for param in req_param_dict.keys():
             req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
             with pytest.raises(ValueError):
@@ -2417,14 +2136,8 @@ class TestUpdateDataProductRelease:
         """
         # Set up mock
         url = preprocess_url('/data_product_exchange/v1/data_products/testString/releases/testString')
-        mock_response = '{"version": "1.0.0", "state": "draft", "data_product": {"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "name": "My Data Product", "description": "This is a description of My Data Product.", "tags": ["tags"], "use_cases": [{"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}], "types": ["data"], "contract_terms": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "id": "id", "documents": [{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}]}], "is_restricted": false, "id": "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd", "asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "domain": {"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "parts_out": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}, "type": "data_asset"}, "delivery_methods": [{"id": "09cf5fcc-cb9d-4995-a8e4-16517b25229f", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}]}], "published_by": "published_by", "published_at": "2019-01-01T12:00:00.000Z", "created_by": "created_by", "created_at": "2019-01-01T12:00:00.000Z", "workflows": {"order_access_request": {"task_assignee_users": ["task_assignee_users"]}}}'
-        responses.add(
-            responses.PATCH,
-            url,
-            body=mock_response,
-            content_type='application/json',
-            status=200,
-        )
+        mock_response = '{"version": "1.0.0", "state": "draft", "data_product": {"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "release": {"id": "18bdbde1-918e-4ecf-aa23-6727bf319e14"}, "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "name": "My Data Product", "description": "This is a description of My Data Product.", "tags": ["tags"], "use_cases": [{"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}], "types": ["data"], "contract_terms": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "id": "id", "documents": [{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}], "error_msg": "error_msg"}], "is_restricted": false, "id": "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd", "asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "domain": {"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "parts_out": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}, "type": "data_asset"}, "delivery_methods": [{"id": "09cf5fcc-cb9d-4995-a8e4-16517b25229f", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}]}], "published_by": "published_by", "published_at": "2019-01-01T12:00:00.000Z", "created_by": "created_by", "created_at": "2019-01-01T12:00:00.000Z", "workflows": {"order_access_request": {"task_assignee_users": ["task_assignee_users"], "pre_approved_users": ["pre_approved_users"], "custom_workflow_definition": {"id": "18bdbde1-918e-4ecf-aa23-6727bf319e14"}}}, "properties": {"anyKey": "anyValue"}}'
+        responses.add(responses.PATCH, url, body=mock_response, content_type='application/json', status=200)
 
         # Construct a dict representation of a JsonPatchOperation model
         json_patch_operation_model = {}
@@ -2440,10 +2153,7 @@ class TestUpdateDataProductRelease:
 
         # Invoke method
         response = _service.update_data_product_release(
-            data_product_id,
-            release_id,
-            json_patch_instructions,
-            headers={},
+            data_product_id, release_id, json_patch_instructions, headers={}
         )
 
         # Check for correct operation
@@ -2469,14 +2179,8 @@ class TestUpdateDataProductRelease:
         """
         # Set up mock
         url = preprocess_url('/data_product_exchange/v1/data_products/testString/releases/testString')
-        mock_response = '{"version": "1.0.0", "state": "draft", "data_product": {"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "name": "My Data Product", "description": "This is a description of My Data Product.", "tags": ["tags"], "use_cases": [{"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}], "types": ["data"], "contract_terms": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "id": "id", "documents": [{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}]}], "is_restricted": false, "id": "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd", "asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "domain": {"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "parts_out": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}, "type": "data_asset"}, "delivery_methods": [{"id": "09cf5fcc-cb9d-4995-a8e4-16517b25229f", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}]}], "published_by": "published_by", "published_at": "2019-01-01T12:00:00.000Z", "created_by": "created_by", "created_at": "2019-01-01T12:00:00.000Z", "workflows": {"order_access_request": {"task_assignee_users": ["task_assignee_users"]}}}'
-        responses.add(
-            responses.PATCH,
-            url,
-            body=mock_response,
-            content_type='application/json',
-            status=200,
-        )
+        mock_response = '{"version": "1.0.0", "state": "draft", "data_product": {"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "release": {"id": "18bdbde1-918e-4ecf-aa23-6727bf319e14"}, "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "name": "My Data Product", "description": "This is a description of My Data Product.", "tags": ["tags"], "use_cases": [{"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}], "types": ["data"], "contract_terms": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "id": "id", "documents": [{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}], "error_msg": "error_msg"}], "is_restricted": false, "id": "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd", "asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "domain": {"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "parts_out": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}, "type": "data_asset"}, "delivery_methods": [{"id": "09cf5fcc-cb9d-4995-a8e4-16517b25229f", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}]}], "published_by": "published_by", "published_at": "2019-01-01T12:00:00.000Z", "created_by": "created_by", "created_at": "2019-01-01T12:00:00.000Z", "workflows": {"order_access_request": {"task_assignee_users": ["task_assignee_users"], "pre_approved_users": ["pre_approved_users"], "custom_workflow_definition": {"id": "18bdbde1-918e-4ecf-aa23-6727bf319e14"}}}, "properties": {"anyKey": "anyValue"}}'
+        responses.add(responses.PATCH, url, body=mock_response, content_type='application/json', status=200)
 
         # Construct a dict representation of a JsonPatchOperation model
         json_patch_operation_model = {}
@@ -2526,13 +2230,7 @@ class TestGetReleaseContractTermsDocument:
             '/data_product_exchange/v1/data_products/testString/releases/testString/contract_terms/testString/documents/testString'
         )
         mock_response = '{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}'
-        responses.add(
-            responses.GET,
-            url,
-            body=mock_response,
-            content_type='application/json',
-            status=200,
-        )
+        responses.add(responses.GET, url, body=mock_response, content_type='application/json', status=200)
 
         # Set up parameter values
         data_product_id = 'testString'
@@ -2542,11 +2240,7 @@ class TestGetReleaseContractTermsDocument:
 
         # Invoke method
         response = _service.get_release_contract_terms_document(
-            data_product_id,
-            release_id,
-            contract_terms_id,
-            document_id,
-            headers={},
+            data_product_id, release_id, contract_terms_id, document_id, headers={}
         )
 
         # Check for correct operation
@@ -2572,13 +2266,7 @@ class TestGetReleaseContractTermsDocument:
             '/data_product_exchange/v1/data_products/testString/releases/testString/contract_terms/testString/documents/testString'
         )
         mock_response = '{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}'
-        responses.add(
-            responses.GET,
-            url,
-            body=mock_response,
-            content_type='application/json',
-            status=200,
-        )
+        responses.add(responses.GET, url, body=mock_response, content_type='application/json', status=200)
 
         # Set up parameter values
         data_product_id = 'testString'
@@ -2620,14 +2308,8 @@ class TestListDataProductReleases:
         """
         # Set up mock
         url = preprocess_url('/data_product_exchange/v1/data_products/testString/releases')
-        mock_response = '{"limit": 200, "first": {"href": "https://api.example.com/collection"}, "next": {"href": "https://api.example.com/collection?start=eyJvZmZzZXQiOjAsImRvbmUiOnRydWV9", "start": "eyJvZmZzZXQiOjAsImRvbmUiOnRydWV9"}, "releases": [{"version": "1.0.0", "state": "draft", "data_product": {"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "name": "My Data Product", "description": "This is a description of My Data Product.", "tags": ["tags"], "use_cases": [{"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}], "types": ["data"], "contract_terms": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "id": "id", "documents": [{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}]}], "is_restricted": false, "id": "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd", "asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}}]}'
-        responses.add(
-            responses.GET,
-            url,
-            body=mock_response,
-            content_type='application/json',
-            status=200,
-        )
+        mock_response = '{"limit": 200, "first": {"href": "https://api.example.com/collection"}, "next": {"href": "https://api.example.com/collection?start=eyJvZmZzZXQiOjAsImRvbmUiOnRydWV9", "start": "eyJvZmZzZXQiOjAsImRvbmUiOnRydWV9"}, "releases": [{"version": "1.0.0", "state": "draft", "data_product": {"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "release": {"id": "18bdbde1-918e-4ecf-aa23-6727bf319e14"}, "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "name": "My Data Product", "description": "This is a description of My Data Product.", "tags": ["tags"], "use_cases": [{"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}], "types": ["data"], "contract_terms": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "id": "id", "documents": [{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}], "error_msg": "error_msg"}], "is_restricted": false, "id": "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd", "asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}}]}'
+        responses.add(responses.GET, url, body=mock_response, content_type='application/json', status=200)
 
         # Set up parameter values
         data_product_id = 'testString'
@@ -2676,23 +2358,14 @@ class TestListDataProductReleases:
         """
         # Set up mock
         url = preprocess_url('/data_product_exchange/v1/data_products/testString/releases')
-        mock_response = '{"limit": 200, "first": {"href": "https://api.example.com/collection"}, "next": {"href": "https://api.example.com/collection?start=eyJvZmZzZXQiOjAsImRvbmUiOnRydWV9", "start": "eyJvZmZzZXQiOjAsImRvbmUiOnRydWV9"}, "releases": [{"version": "1.0.0", "state": "draft", "data_product": {"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "name": "My Data Product", "description": "This is a description of My Data Product.", "tags": ["tags"], "use_cases": [{"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}], "types": ["data"], "contract_terms": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "id": "id", "documents": [{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}]}], "is_restricted": false, "id": "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd", "asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}}]}'
-        responses.add(
-            responses.GET,
-            url,
-            body=mock_response,
-            content_type='application/json',
-            status=200,
-        )
+        mock_response = '{"limit": 200, "first": {"href": "https://api.example.com/collection"}, "next": {"href": "https://api.example.com/collection?start=eyJvZmZzZXQiOjAsImRvbmUiOnRydWV9", "start": "eyJvZmZzZXQiOjAsImRvbmUiOnRydWV9"}, "releases": [{"version": "1.0.0", "state": "draft", "data_product": {"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "release": {"id": "18bdbde1-918e-4ecf-aa23-6727bf319e14"}, "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "name": "My Data Product", "description": "This is a description of My Data Product.", "tags": ["tags"], "use_cases": [{"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}], "types": ["data"], "contract_terms": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "id": "id", "documents": [{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}], "error_msg": "error_msg"}], "is_restricted": false, "id": "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd", "asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}}]}'
+        responses.add(responses.GET, url, body=mock_response, content_type='application/json', status=200)
 
         # Set up parameter values
         data_product_id = 'testString'
 
         # Invoke method
-        response = _service.list_data_product_releases(
-            data_product_id,
-            headers={},
-        )
+        response = _service.list_data_product_releases(data_product_id, headers={})
 
         # Check for correct operation
         assert len(responses.calls) == 1
@@ -2714,22 +2387,14 @@ class TestListDataProductReleases:
         """
         # Set up mock
         url = preprocess_url('/data_product_exchange/v1/data_products/testString/releases')
-        mock_response = '{"limit": 200, "first": {"href": "https://api.example.com/collection"}, "next": {"href": "https://api.example.com/collection?start=eyJvZmZzZXQiOjAsImRvbmUiOnRydWV9", "start": "eyJvZmZzZXQiOjAsImRvbmUiOnRydWV9"}, "releases": [{"version": "1.0.0", "state": "draft", "data_product": {"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "name": "My Data Product", "description": "This is a description of My Data Product.", "tags": ["tags"], "use_cases": [{"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}], "types": ["data"], "contract_terms": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "id": "id", "documents": [{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}]}], "is_restricted": false, "id": "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd", "asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}}]}'
-        responses.add(
-            responses.GET,
-            url,
-            body=mock_response,
-            content_type='application/json',
-            status=200,
-        )
+        mock_response = '{"limit": 200, "first": {"href": "https://api.example.com/collection"}, "next": {"href": "https://api.example.com/collection?start=eyJvZmZzZXQiOjAsImRvbmUiOnRydWV9", "start": "eyJvZmZzZXQiOjAsImRvbmUiOnRydWV9"}, "releases": [{"version": "1.0.0", "state": "draft", "data_product": {"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "release": {"id": "18bdbde1-918e-4ecf-aa23-6727bf319e14"}, "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "name": "My Data Product", "description": "This is a description of My Data Product.", "tags": ["tags"], "use_cases": [{"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}], "types": ["data"], "contract_terms": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "id": "id", "documents": [{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}], "error_msg": "error_msg"}], "is_restricted": false, "id": "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd", "asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}}]}'
+        responses.add(responses.GET, url, body=mock_response, content_type='application/json', status=200)
 
         # Set up parameter values
         data_product_id = 'testString'
 
         # Pass in all but one required param and check for a ValueError
-        req_param_dict = {
-            "data_product_id": data_product_id,
-        }
+        req_param_dict = {"data_product_id": data_product_id}
         for param in req_param_dict.keys():
             req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
             with pytest.raises(ValueError):
@@ -2751,22 +2416,10 @@ class TestListDataProductReleases:
         """
         # Set up a two-page mock response
         url = preprocess_url('/data_product_exchange/v1/data_products/testString/releases')
-        mock_response1 = '{"next":{"start":"1"},"total_count":2,"limit":1,"releases":[{"version":"1.0.0","state":"draft","data_product":{"id":"b38df608-d34b-4d58-8136-ed25e6c6684e","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}},"name":"My Data Product","description":"This is a description of My Data Product.","tags":["tags"],"use_cases":[{"id":"id","name":"name","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}}],"types":["data"],"contract_terms":[{"asset":{"id":"2b0bf220-079c-11ee-be56-0242ac120002","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}},"id":"id","documents":[{"url":"url","type":"terms_and_conditions","name":"name","id":"2b0bf220-079c-11ee-be56-0242ac120002","attachment":{"id":"id"},"upload_url":"upload_url"}]}],"is_restricted":false,"id":"2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd","asset":{"id":"2b0bf220-079c-11ee-be56-0242ac120002","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}}}]}'
-        mock_response2 = '{"total_count":2,"limit":1,"releases":[{"version":"1.0.0","state":"draft","data_product":{"id":"b38df608-d34b-4d58-8136-ed25e6c6684e","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}},"name":"My Data Product","description":"This is a description of My Data Product.","tags":["tags"],"use_cases":[{"id":"id","name":"name","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}}],"types":["data"],"contract_terms":[{"asset":{"id":"2b0bf220-079c-11ee-be56-0242ac120002","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}},"id":"id","documents":[{"url":"url","type":"terms_and_conditions","name":"name","id":"2b0bf220-079c-11ee-be56-0242ac120002","attachment":{"id":"id"},"upload_url":"upload_url"}]}],"is_restricted":false,"id":"2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd","asset":{"id":"2b0bf220-079c-11ee-be56-0242ac120002","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}}}]}'
-        responses.add(
-            responses.GET,
-            url,
-            body=mock_response1,
-            content_type='application/json',
-            status=200,
-        )
-        responses.add(
-            responses.GET,
-            url,
-            body=mock_response2,
-            content_type='application/json',
-            status=200,
-        )
+        mock_response1 = '{"next":{"start":"1"},"total_count":2,"limit":1,"releases":[{"version":"1.0.0","state":"draft","data_product":{"id":"b38df608-d34b-4d58-8136-ed25e6c6684e","release":{"id":"18bdbde1-918e-4ecf-aa23-6727bf319e14"},"container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}},"name":"My Data Product","description":"This is a description of My Data Product.","tags":["tags"],"use_cases":[{"id":"id","name":"name","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}}],"types":["data"],"contract_terms":[{"asset":{"id":"2b0bf220-079c-11ee-be56-0242ac120002","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}},"id":"id","documents":[{"url":"url","type":"terms_and_conditions","name":"name","id":"2b0bf220-079c-11ee-be56-0242ac120002","attachment":{"id":"id"},"upload_url":"upload_url"}],"error_msg":"error_msg"}],"is_restricted":false,"id":"2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd","asset":{"id":"2b0bf220-079c-11ee-be56-0242ac120002","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}}}]}'
+        mock_response2 = '{"total_count":2,"limit":1,"releases":[{"version":"1.0.0","state":"draft","data_product":{"id":"b38df608-d34b-4d58-8136-ed25e6c6684e","release":{"id":"18bdbde1-918e-4ecf-aa23-6727bf319e14"},"container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}},"name":"My Data Product","description":"This is a description of My Data Product.","tags":["tags"],"use_cases":[{"id":"id","name":"name","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}}],"types":["data"],"contract_terms":[{"asset":{"id":"2b0bf220-079c-11ee-be56-0242ac120002","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}},"id":"id","documents":[{"url":"url","type":"terms_and_conditions","name":"name","id":"2b0bf220-079c-11ee-be56-0242ac120002","attachment":{"id":"id"},"upload_url":"upload_url"}],"error_msg":"error_msg"}],"is_restricted":false,"id":"2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd","asset":{"id":"2b0bf220-079c-11ee-be56-0242ac120002","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}}}]}'
+        responses.add(responses.GET, url, body=mock_response1, content_type='application/json', status=200)
+        responses.add(responses.GET, url, body=mock_response2, content_type='application/json', status=200)
 
         # Exercise the pager class for this operation
         all_results = []
@@ -2791,22 +2444,10 @@ class TestListDataProductReleases:
         """
         # Set up a two-page mock response
         url = preprocess_url('/data_product_exchange/v1/data_products/testString/releases')
-        mock_response1 = '{"next":{"start":"1"},"total_count":2,"limit":1,"releases":[{"version":"1.0.0","state":"draft","data_product":{"id":"b38df608-d34b-4d58-8136-ed25e6c6684e","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}},"name":"My Data Product","description":"This is a description of My Data Product.","tags":["tags"],"use_cases":[{"id":"id","name":"name","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}}],"types":["data"],"contract_terms":[{"asset":{"id":"2b0bf220-079c-11ee-be56-0242ac120002","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}},"id":"id","documents":[{"url":"url","type":"terms_and_conditions","name":"name","id":"2b0bf220-079c-11ee-be56-0242ac120002","attachment":{"id":"id"},"upload_url":"upload_url"}]}],"is_restricted":false,"id":"2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd","asset":{"id":"2b0bf220-079c-11ee-be56-0242ac120002","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}}}]}'
-        mock_response2 = '{"total_count":2,"limit":1,"releases":[{"version":"1.0.0","state":"draft","data_product":{"id":"b38df608-d34b-4d58-8136-ed25e6c6684e","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}},"name":"My Data Product","description":"This is a description of My Data Product.","tags":["tags"],"use_cases":[{"id":"id","name":"name","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}}],"types":["data"],"contract_terms":[{"asset":{"id":"2b0bf220-079c-11ee-be56-0242ac120002","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}},"id":"id","documents":[{"url":"url","type":"terms_and_conditions","name":"name","id":"2b0bf220-079c-11ee-be56-0242ac120002","attachment":{"id":"id"},"upload_url":"upload_url"}]}],"is_restricted":false,"id":"2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd","asset":{"id":"2b0bf220-079c-11ee-be56-0242ac120002","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}}}]}'
-        responses.add(
-            responses.GET,
-            url,
-            body=mock_response1,
-            content_type='application/json',
-            status=200,
-        )
-        responses.add(
-            responses.GET,
-            url,
-            body=mock_response2,
-            content_type='application/json',
-            status=200,
-        )
+        mock_response1 = '{"next":{"start":"1"},"total_count":2,"limit":1,"releases":[{"version":"1.0.0","state":"draft","data_product":{"id":"b38df608-d34b-4d58-8136-ed25e6c6684e","release":{"id":"18bdbde1-918e-4ecf-aa23-6727bf319e14"},"container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}},"name":"My Data Product","description":"This is a description of My Data Product.","tags":["tags"],"use_cases":[{"id":"id","name":"name","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}}],"types":["data"],"contract_terms":[{"asset":{"id":"2b0bf220-079c-11ee-be56-0242ac120002","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}},"id":"id","documents":[{"url":"url","type":"terms_and_conditions","name":"name","id":"2b0bf220-079c-11ee-be56-0242ac120002","attachment":{"id":"id"},"upload_url":"upload_url"}],"error_msg":"error_msg"}],"is_restricted":false,"id":"2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd","asset":{"id":"2b0bf220-079c-11ee-be56-0242ac120002","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}}}]}'
+        mock_response2 = '{"total_count":2,"limit":1,"releases":[{"version":"1.0.0","state":"draft","data_product":{"id":"b38df608-d34b-4d58-8136-ed25e6c6684e","release":{"id":"18bdbde1-918e-4ecf-aa23-6727bf319e14"},"container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}},"name":"My Data Product","description":"This is a description of My Data Product.","tags":["tags"],"use_cases":[{"id":"id","name":"name","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}}],"types":["data"],"contract_terms":[{"asset":{"id":"2b0bf220-079c-11ee-be56-0242ac120002","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}},"id":"id","documents":[{"url":"url","type":"terms_and_conditions","name":"name","id":"2b0bf220-079c-11ee-be56-0242ac120002","attachment":{"id":"id"},"upload_url":"upload_url"}],"error_msg":"error_msg"}],"is_restricted":false,"id":"2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd","asset":{"id":"2b0bf220-079c-11ee-be56-0242ac120002","container":{"id":"d29c42eb-7100-4b7a-8257-c196dbcca1cd","type":"catalog"}}}]}'
+        responses.add(responses.GET, url, body=mock_response1, content_type='application/json', status=200)
+        responses.add(responses.GET, url, body=mock_response2, content_type='application/json', status=200)
 
         # Exercise the pager class for this operation
         pager = DataProductReleasesPager(
@@ -2834,25 +2475,15 @@ class TestRetireDataProductRelease:
         """
         # Set up mock
         url = preprocess_url('/data_product_exchange/v1/data_products/testString/releases/testString/retire')
-        mock_response = '{"version": "1.0.0", "state": "draft", "data_product": {"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "name": "My Data Product", "description": "This is a description of My Data Product.", "tags": ["tags"], "use_cases": [{"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}], "types": ["data"], "contract_terms": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "id": "id", "documents": [{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}]}], "is_restricted": false, "id": "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd", "asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "domain": {"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "parts_out": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}, "type": "data_asset"}, "delivery_methods": [{"id": "09cf5fcc-cb9d-4995-a8e4-16517b25229f", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}]}], "published_by": "published_by", "published_at": "2019-01-01T12:00:00.000Z", "created_by": "created_by", "created_at": "2019-01-01T12:00:00.000Z", "workflows": {"order_access_request": {"task_assignee_users": ["task_assignee_users"]}}}'
-        responses.add(
-            responses.POST,
-            url,
-            body=mock_response,
-            content_type='application/json',
-            status=200,
-        )
+        mock_response = '{"version": "1.0.0", "state": "draft", "data_product": {"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "release": {"id": "18bdbde1-918e-4ecf-aa23-6727bf319e14"}, "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "name": "My Data Product", "description": "This is a description of My Data Product.", "tags": ["tags"], "use_cases": [{"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}], "types": ["data"], "contract_terms": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "id": "id", "documents": [{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}], "error_msg": "error_msg"}], "is_restricted": false, "id": "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd", "asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "domain": {"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "parts_out": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}, "type": "data_asset"}, "delivery_methods": [{"id": "09cf5fcc-cb9d-4995-a8e4-16517b25229f", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}]}], "published_by": "published_by", "published_at": "2019-01-01T12:00:00.000Z", "created_by": "created_by", "created_at": "2019-01-01T12:00:00.000Z", "workflows": {"order_access_request": {"task_assignee_users": ["task_assignee_users"], "pre_approved_users": ["pre_approved_users"], "custom_workflow_definition": {"id": "18bdbde1-918e-4ecf-aa23-6727bf319e14"}}}, "properties": {"anyKey": "anyValue"}}'
+        responses.add(responses.POST, url, body=mock_response, content_type='application/json', status=200)
 
         # Set up parameter values
         data_product_id = 'testString'
         release_id = 'testString'
 
         # Invoke method
-        response = _service.retire_data_product_release(
-            data_product_id,
-            release_id,
-            headers={},
-        )
+        response = _service.retire_data_product_release(data_product_id, release_id, headers={})
 
         # Check for correct operation
         assert len(responses.calls) == 1
@@ -2874,24 +2505,15 @@ class TestRetireDataProductRelease:
         """
         # Set up mock
         url = preprocess_url('/data_product_exchange/v1/data_products/testString/releases/testString/retire')
-        mock_response = '{"version": "1.0.0", "state": "draft", "data_product": {"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "name": "My Data Product", "description": "This is a description of My Data Product.", "tags": ["tags"], "use_cases": [{"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}], "types": ["data"], "contract_terms": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "id": "id", "documents": [{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}]}], "is_restricted": false, "id": "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd", "asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "domain": {"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "parts_out": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}, "type": "data_asset"}, "delivery_methods": [{"id": "09cf5fcc-cb9d-4995-a8e4-16517b25229f", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}]}], "published_by": "published_by", "published_at": "2019-01-01T12:00:00.000Z", "created_by": "created_by", "created_at": "2019-01-01T12:00:00.000Z", "workflows": {"order_access_request": {"task_assignee_users": ["task_assignee_users"]}}}'
-        responses.add(
-            responses.POST,
-            url,
-            body=mock_response,
-            content_type='application/json',
-            status=200,
-        )
+        mock_response = '{"version": "1.0.0", "state": "draft", "data_product": {"id": "b38df608-d34b-4d58-8136-ed25e6c6684e", "release": {"id": "18bdbde1-918e-4ecf-aa23-6727bf319e14"}, "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "name": "My Data Product", "description": "This is a description of My Data Product.", "tags": ["tags"], "use_cases": [{"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}], "types": ["data"], "contract_terms": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "id": "id", "documents": [{"url": "url", "type": "terms_and_conditions", "name": "name", "id": "2b0bf220-079c-11ee-be56-0242ac120002", "attachment": {"id": "id"}, "upload_url": "upload_url"}], "error_msg": "error_msg"}], "is_restricted": false, "id": "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd", "asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "domain": {"id": "id", "name": "name", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}, "parts_out": [{"asset": {"id": "2b0bf220-079c-11ee-be56-0242ac120002", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}, "type": "data_asset"}, "delivery_methods": [{"id": "09cf5fcc-cb9d-4995-a8e4-16517b25229f", "container": {"id": "d29c42eb-7100-4b7a-8257-c196dbcca1cd", "type": "catalog"}}]}], "published_by": "published_by", "published_at": "2019-01-01T12:00:00.000Z", "created_by": "created_by", "created_at": "2019-01-01T12:00:00.000Z", "workflows": {"order_access_request": {"task_assignee_users": ["task_assignee_users"], "pre_approved_users": ["pre_approved_users"], "custom_workflow_definition": {"id": "18bdbde1-918e-4ecf-aa23-6727bf319e14"}}}, "properties": {"anyKey": "anyValue"}}'
+        responses.add(responses.POST, url, body=mock_response, content_type='application/json', status=200)
 
         # Set up parameter values
         data_product_id = 'testString'
         release_id = 'testString'
 
         # Pass in all but one required param and check for a ValueError
-        req_param_dict = {
-            "data_product_id": data_product_id,
-            "release_id": release_id,
-        }
+        req_param_dict = {"data_product_id": data_product_id, "release_id": release_id}
         for param in req_param_dict.keys():
             req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
             with pytest.raises(ValueError):
@@ -3181,12 +2803,16 @@ class TestModel_DataProduct:
 
         # Construct dict forms of any model objects needed in order to build this model.
 
+        data_product_draft_version_release_model = {}  # DataProductDraftVersionRelease
+        data_product_draft_version_release_model['id'] = '18bdbde1-918e-4ecf-aa23-6727bf319e14'
+
         container_reference_model = {}  # ContainerReference
         container_reference_model['id'] = 'd29c42eb-7100-4b7a-8257-c196dbcca1cd'
         container_reference_model['type'] = 'catalog'
 
         data_product_version_summary_data_product_model = {}  # DataProductVersionSummaryDataProduct
         data_product_version_summary_data_product_model['id'] = 'b38df608-d34b-4d58-8136-ed25e6c6684e'
+        data_product_version_summary_data_product_model['release'] = data_product_draft_version_release_model
         data_product_version_summary_data_product_model['container'] = container_reference_model
 
         use_case_model = {}  # UseCase
@@ -3213,6 +2839,7 @@ class TestModel_DataProduct:
         data_product_contract_terms_model['asset'] = asset_reference_model
         data_product_contract_terms_model['id'] = 'testString'
         data_product_contract_terms_model['documents'] = [contract_terms_document_model]
+        data_product_contract_terms_model['error_msg'] = 'testString'
 
         data_product_version_summary_model = {}  # DataProductVersionSummary
         data_product_version_summary_model['version'] = '1.0.0'
@@ -3233,6 +2860,7 @@ class TestModel_DataProduct:
         # Construct a json representation of a DataProduct model
         data_product_model_json = {}
         data_product_model_json['id'] = 'b38df608-d34b-4d58-8136-ed25e6c6684e'
+        data_product_model_json['release'] = data_product_draft_version_release_model
         data_product_model_json['container'] = container_reference_model
         data_product_model_json['latest_release'] = data_product_version_summary_model
         data_product_model_json['drafts'] = [data_product_version_summary_model]
@@ -3289,6 +2917,7 @@ class TestModel_DataProductContractTerms:
         data_product_contract_terms_model_json['asset'] = asset_reference_model
         data_product_contract_terms_model_json['id'] = 'testString'
         data_product_contract_terms_model_json['documents'] = [contract_terms_document_model]
+        data_product_contract_terms_model_json['error_msg'] = 'testString'
 
         # Construct a model instance of DataProductContractTerms by calling from_dict on the json representation
         data_product_contract_terms_model = DataProductContractTerms.from_dict(data_product_contract_terms_model_json)
@@ -3306,6 +2935,42 @@ class TestModel_DataProductContractTerms:
         # Convert model instance back to dict and verify no loss of data
         data_product_contract_terms_model_json2 = data_product_contract_terms_model.to_dict()
         assert data_product_contract_terms_model_json2 == data_product_contract_terms_model_json
+
+
+class TestModel_DataProductCustomWorkflowDefinition:
+    """
+    Test Class for DataProductCustomWorkflowDefinition
+    """
+
+    def test_data_product_custom_workflow_definition_serialization(self):
+        """
+        Test serialization/deserialization for DataProductCustomWorkflowDefinition
+        """
+
+        # Construct a json representation of a DataProductCustomWorkflowDefinition model
+        data_product_custom_workflow_definition_model_json = {}
+        data_product_custom_workflow_definition_model_json['id'] = '18bdbde1-918e-4ecf-aa23-6727bf319e14'
+
+        # Construct a model instance of DataProductCustomWorkflowDefinition by calling from_dict on the json representation
+        data_product_custom_workflow_definition_model = DataProductCustomWorkflowDefinition.from_dict(
+            data_product_custom_workflow_definition_model_json
+        )
+        assert data_product_custom_workflow_definition_model != False
+
+        # Construct a model instance of DataProductCustomWorkflowDefinition by calling from_dict on the json representation
+        data_product_custom_workflow_definition_model_dict = DataProductCustomWorkflowDefinition.from_dict(
+            data_product_custom_workflow_definition_model_json
+        ).__dict__
+        data_product_custom_workflow_definition_model2 = DataProductCustomWorkflowDefinition(
+            **data_product_custom_workflow_definition_model_dict
+        )
+
+        # Verify the model instances are equivalent
+        assert data_product_custom_workflow_definition_model == data_product_custom_workflow_definition_model2
+
+        # Convert model instance back to dict and verify no loss of data
+        data_product_custom_workflow_definition_model_json2 = data_product_custom_workflow_definition_model.to_dict()
+        assert data_product_custom_workflow_definition_model_json2 == data_product_custom_workflow_definition_model_json
 
 
 class TestModel_DataProductDraftCollection:
@@ -3327,12 +2992,16 @@ class TestModel_DataProductDraftCollection:
         next_page_model['href'] = 'https://api.example.com/collection?start=eyJvZmZzZXQiOjAsImRvbmUiOnRydWV9'
         next_page_model['start'] = 'eyJvZmZzZXQiOjAsImRvbmUiOnRydWV9'
 
+        data_product_draft_version_release_model = {}  # DataProductDraftVersionRelease
+        data_product_draft_version_release_model['id'] = '18bdbde1-918e-4ecf-aa23-6727bf319e14'
+
         container_reference_model = {}  # ContainerReference
         container_reference_model['id'] = 'd29c42eb-7100-4b7a-8257-c196dbcca1cd'
         container_reference_model['type'] = 'catalog'
 
         data_product_version_summary_data_product_model = {}  # DataProductVersionSummaryDataProduct
         data_product_version_summary_data_product_model['id'] = 'b38df608-d34b-4d58-8136-ed25e6c6684e'
+        data_product_version_summary_data_product_model['release'] = data_product_draft_version_release_model
         data_product_version_summary_data_product_model['container'] = container_reference_model
 
         use_case_model = {}  # UseCase
@@ -3359,6 +3028,7 @@ class TestModel_DataProductDraftCollection:
         data_product_contract_terms_model['asset'] = asset_reference_model
         data_product_contract_terms_model['id'] = 'testString'
         data_product_contract_terms_model['documents'] = [contract_terms_document_model]
+        data_product_contract_terms_model['error_msg'] = 'testString'
 
         data_product_version_summary_model = {}  # DataProductVersionSummary
         data_product_version_summary_model['version'] = '1.0.0'
@@ -3403,6 +3073,42 @@ class TestModel_DataProductDraftCollection:
         assert data_product_draft_collection_model_json2 == data_product_draft_collection_model_json
 
 
+class TestModel_DataProductDraftVersionRelease:
+    """
+    Test Class for DataProductDraftVersionRelease
+    """
+
+    def test_data_product_draft_version_release_serialization(self):
+        """
+        Test serialization/deserialization for DataProductDraftVersionRelease
+        """
+
+        # Construct a json representation of a DataProductDraftVersionRelease model
+        data_product_draft_version_release_model_json = {}
+        data_product_draft_version_release_model_json['id'] = '18bdbde1-918e-4ecf-aa23-6727bf319e14'
+
+        # Construct a model instance of DataProductDraftVersionRelease by calling from_dict on the json representation
+        data_product_draft_version_release_model = DataProductDraftVersionRelease.from_dict(
+            data_product_draft_version_release_model_json
+        )
+        assert data_product_draft_version_release_model != False
+
+        # Construct a model instance of DataProductDraftVersionRelease by calling from_dict on the json representation
+        data_product_draft_version_release_model_dict = DataProductDraftVersionRelease.from_dict(
+            data_product_draft_version_release_model_json
+        ).__dict__
+        data_product_draft_version_release_model2 = DataProductDraftVersionRelease(
+            **data_product_draft_version_release_model_dict
+        )
+
+        # Verify the model instances are equivalent
+        assert data_product_draft_version_release_model == data_product_draft_version_release_model2
+
+        # Convert model instance back to dict and verify no loss of data
+        data_product_draft_version_release_model_json2 = data_product_draft_version_release_model.to_dict()
+        assert data_product_draft_version_release_model_json2 == data_product_draft_version_release_model_json
+
+
 class TestModel_DataProductIdentity:
     """
     Test Class for DataProductIdentity
@@ -3413,9 +3119,15 @@ class TestModel_DataProductIdentity:
         Test serialization/deserialization for DataProductIdentity
         """
 
+        # Construct dict forms of any model objects needed in order to build this model.
+
+        data_product_draft_version_release_model = {}  # DataProductDraftVersionRelease
+        data_product_draft_version_release_model['id'] = '18bdbde1-918e-4ecf-aa23-6727bf319e14'
+
         # Construct a json representation of a DataProductIdentity model
         data_product_identity_model_json = {}
         data_product_identity_model_json['id'] = 'b38df608-d34b-4d58-8136-ed25e6c6684e'
+        data_product_identity_model_json['release'] = data_product_draft_version_release_model
 
         # Construct a model instance of DataProductIdentity by calling from_dict on the json representation
         data_product_identity_model = DataProductIdentity.from_dict(data_product_identity_model_json)
@@ -3443,9 +3155,18 @@ class TestModel_DataProductOrderAccessRequest:
         Test serialization/deserialization for DataProductOrderAccessRequest
         """
 
+        # Construct dict forms of any model objects needed in order to build this model.
+
+        data_product_custom_workflow_definition_model = {}  # DataProductCustomWorkflowDefinition
+        data_product_custom_workflow_definition_model['id'] = '18bdbde1-918e-4ecf-aa23-6727bf319e14'
+
         # Construct a json representation of a DataProductOrderAccessRequest model
         data_product_order_access_request_model_json = {}
         data_product_order_access_request_model_json['task_assignee_users'] = ['testString']
+        data_product_order_access_request_model_json['pre_approved_users'] = ['testString']
+        data_product_order_access_request_model_json['custom_workflow_definition'] = (
+            data_product_custom_workflow_definition_model
+        )
 
         # Construct a model instance of DataProductOrderAccessRequest by calling from_dict on the json representation
         data_product_order_access_request_model = DataProductOrderAccessRequest.from_dict(
@@ -3534,12 +3255,16 @@ class TestModel_DataProductReleaseCollection:
         next_page_model['href'] = 'https://api.example.com/collection?start=eyJvZmZzZXQiOjAsImRvbmUiOnRydWV9'
         next_page_model['start'] = 'eyJvZmZzZXQiOjAsImRvbmUiOnRydWV9'
 
+        data_product_draft_version_release_model = {}  # DataProductDraftVersionRelease
+        data_product_draft_version_release_model['id'] = '18bdbde1-918e-4ecf-aa23-6727bf319e14'
+
         container_reference_model = {}  # ContainerReference
         container_reference_model['id'] = 'd29c42eb-7100-4b7a-8257-c196dbcca1cd'
         container_reference_model['type'] = 'catalog'
 
         data_product_version_summary_data_product_model = {}  # DataProductVersionSummaryDataProduct
         data_product_version_summary_data_product_model['id'] = 'b38df608-d34b-4d58-8136-ed25e6c6684e'
+        data_product_version_summary_data_product_model['release'] = data_product_draft_version_release_model
         data_product_version_summary_data_product_model['container'] = container_reference_model
 
         use_case_model = {}  # UseCase
@@ -3566,6 +3291,7 @@ class TestModel_DataProductReleaseCollection:
         data_product_contract_terms_model['asset'] = asset_reference_model
         data_product_contract_terms_model['id'] = 'testString'
         data_product_contract_terms_model['documents'] = [contract_terms_document_model]
+        data_product_contract_terms_model['error_msg'] = 'testString'
 
         data_product_version_summary_model = {}  # DataProductVersionSummary
         data_product_version_summary_model['version'] = '1.0.0'
@@ -3624,6 +3350,9 @@ class TestModel_DataProductSummary:
 
         # Construct dict forms of any model objects needed in order to build this model.
 
+        data_product_draft_version_release_model = {}  # DataProductDraftVersionRelease
+        data_product_draft_version_release_model['id'] = '18bdbde1-918e-4ecf-aa23-6727bf319e14'
+
         container_reference_model = {}  # ContainerReference
         container_reference_model['id'] = 'd29c42eb-7100-4b7a-8257-c196dbcca1cd'
         container_reference_model['type'] = 'catalog'
@@ -3631,6 +3360,7 @@ class TestModel_DataProductSummary:
         # Construct a json representation of a DataProductSummary model
         data_product_summary_model_json = {}
         data_product_summary_model_json['id'] = 'b38df608-d34b-4d58-8136-ed25e6c6684e'
+        data_product_summary_model_json['release'] = data_product_draft_version_release_model
         data_product_summary_model_json['container'] = container_reference_model
 
         # Construct a model instance of DataProductSummary by calling from_dict on the json representation
@@ -3668,12 +3398,16 @@ class TestModel_DataProductSummaryCollection:
         next_page_model['href'] = 'https://api.example.com/collection?start=eyJvZmZzZXQiOjAsImRvbmUiOnRydWV9'
         next_page_model['start'] = 'eyJvZmZzZXQiOjAsImRvbmUiOnRydWV9'
 
+        data_product_draft_version_release_model = {}  # DataProductDraftVersionRelease
+        data_product_draft_version_release_model['id'] = '18bdbde1-918e-4ecf-aa23-6727bf319e14'
+
         container_reference_model = {}  # ContainerReference
         container_reference_model['id'] = 'd29c42eb-7100-4b7a-8257-c196dbcca1cd'
         container_reference_model['type'] = 'catalog'
 
         data_product_summary_model = {}  # DataProductSummary
         data_product_summary_model['id'] = 'b38df608-d34b-4d58-8136-ed25e6c6684e'
+        data_product_summary_model['release'] = data_product_draft_version_release_model
         data_product_summary_model['container'] = container_reference_model
 
         # Construct a json representation of a DataProductSummaryCollection model
@@ -3717,12 +3451,16 @@ class TestModel_DataProductVersion:
 
         # Construct dict forms of any model objects needed in order to build this model.
 
+        data_product_draft_version_release_model = {}  # DataProductDraftVersionRelease
+        data_product_draft_version_release_model['id'] = '18bdbde1-918e-4ecf-aa23-6727bf319e14'
+
         container_reference_model = {}  # ContainerReference
         container_reference_model['id'] = 'd29c42eb-7100-4b7a-8257-c196dbcca1cd'
         container_reference_model['type'] = 'catalog'
 
         data_product_version_data_product_model = {}  # DataProductVersionDataProduct
         data_product_version_data_product_model['id'] = 'b38df608-d34b-4d58-8136-ed25e6c6684e'
+        data_product_version_data_product_model['release'] = data_product_draft_version_release_model
         data_product_version_data_product_model['container'] = container_reference_model
 
         use_case_model = {}  # UseCase
@@ -3749,6 +3487,7 @@ class TestModel_DataProductVersion:
         data_product_contract_terms_model['asset'] = asset_reference_model
         data_product_contract_terms_model['id'] = 'testString'
         data_product_contract_terms_model['documents'] = [contract_terms_document_model]
+        data_product_contract_terms_model['error_msg'] = 'testString'
 
         domain_model = {}  # Domain
         domain_model['id'] = 'testString'
@@ -3768,8 +3507,15 @@ class TestModel_DataProductVersion:
         data_product_part_model['asset'] = asset_part_reference_model
         data_product_part_model['delivery_methods'] = [delivery_method_model]
 
+        data_product_custom_workflow_definition_model = {}  # DataProductCustomWorkflowDefinition
+        data_product_custom_workflow_definition_model['id'] = '18bdbde1-918e-4ecf-aa23-6727bf319e14'
+
         data_product_order_access_request_model = {}  # DataProductOrderAccessRequest
         data_product_order_access_request_model['task_assignee_users'] = ['testString']
+        data_product_order_access_request_model['pre_approved_users'] = ['testString']
+        data_product_order_access_request_model['custom_workflow_definition'] = (
+            data_product_custom_workflow_definition_model
+        )
 
         data_product_workflows_model = {}  # DataProductWorkflows
         data_product_workflows_model['order_access_request'] = data_product_order_access_request_model
@@ -3797,6 +3543,7 @@ class TestModel_DataProductVersion:
         data_product_version_model_json['created_by'] = 'testString'
         data_product_version_model_json['created_at'] = '2019-01-01T12:00:00Z'
         data_product_version_model_json['workflows'] = data_product_workflows_model
+        data_product_version_model_json['properties'] = {'anyKey': 'anyValue'}
 
         # Construct a model instance of DataProductVersion by calling from_dict on the json representation
         data_product_version_model = DataProductVersion.from_dict(data_product_version_model_json)
@@ -3826,6 +3573,9 @@ class TestModel_DataProductVersionDataProduct:
 
         # Construct dict forms of any model objects needed in order to build this model.
 
+        data_product_draft_version_release_model = {}  # DataProductDraftVersionRelease
+        data_product_draft_version_release_model['id'] = '18bdbde1-918e-4ecf-aa23-6727bf319e14'
+
         container_reference_model = {}  # ContainerReference
         container_reference_model['id'] = 'd29c42eb-7100-4b7a-8257-c196dbcca1cd'
         container_reference_model['type'] = 'catalog'
@@ -3833,6 +3583,7 @@ class TestModel_DataProductVersionDataProduct:
         # Construct a json representation of a DataProductVersionDataProduct model
         data_product_version_data_product_model_json = {}
         data_product_version_data_product_model_json['id'] = 'b38df608-d34b-4d58-8136-ed25e6c6684e'
+        data_product_version_data_product_model_json['release'] = data_product_draft_version_release_model
         data_product_version_data_product_model_json['container'] = container_reference_model
 
         # Construct a model instance of DataProductVersionDataProduct by calling from_dict on the json representation
@@ -3869,8 +3620,12 @@ class TestModel_DataProductVersionPrototype:
 
         # Construct dict forms of any model objects needed in order to build this model.
 
+        data_product_draft_version_release_model = {}  # DataProductDraftVersionRelease
+        data_product_draft_version_release_model['id'] = '18bdbde1-918e-4ecf-aa23-6727bf319e14'
+
         data_product_identity_model = {}  # DataProductIdentity
         data_product_identity_model['id'] = 'b38df608-d34b-4d58-8136-ed25e6c6684e'
+        data_product_identity_model['release'] = data_product_draft_version_release_model
 
         container_reference_model = {}  # ContainerReference
         container_reference_model['id'] = 'd29c42eb-7100-4b7a-8257-c196dbcca1cd'
@@ -3900,6 +3655,7 @@ class TestModel_DataProductVersionPrototype:
         data_product_contract_terms_model['asset'] = asset_reference_model
         data_product_contract_terms_model['id'] = 'testString'
         data_product_contract_terms_model['documents'] = [contract_terms_document_model]
+        data_product_contract_terms_model['error_msg'] = 'testString'
 
         container_identity_model = {}  # ContainerIdentity
         container_identity_model['id'] = 'd29c42eb-7100-4b7a-8257-c196dbcca1cd'
@@ -3926,8 +3682,15 @@ class TestModel_DataProductVersionPrototype:
         data_product_part_model['asset'] = asset_part_reference_model
         data_product_part_model['delivery_methods'] = [delivery_method_model]
 
+        data_product_custom_workflow_definition_model = {}  # DataProductCustomWorkflowDefinition
+        data_product_custom_workflow_definition_model['id'] = '18bdbde1-918e-4ecf-aa23-6727bf319e14'
+
         data_product_order_access_request_model = {}  # DataProductOrderAccessRequest
         data_product_order_access_request_model['task_assignee_users'] = ['testString']
+        data_product_order_access_request_model['pre_approved_users'] = ['testString']
+        data_product_order_access_request_model['custom_workflow_definition'] = (
+            data_product_custom_workflow_definition_model
+        )
 
         data_product_workflows_model = {}  # DataProductWorkflows
         data_product_workflows_model['order_access_request'] = data_product_order_access_request_model
@@ -3981,12 +3744,16 @@ class TestModel_DataProductVersionSummary:
 
         # Construct dict forms of any model objects needed in order to build this model.
 
+        data_product_draft_version_release_model = {}  # DataProductDraftVersionRelease
+        data_product_draft_version_release_model['id'] = '18bdbde1-918e-4ecf-aa23-6727bf319e14'
+
         container_reference_model = {}  # ContainerReference
         container_reference_model['id'] = 'd29c42eb-7100-4b7a-8257-c196dbcca1cd'
         container_reference_model['type'] = 'catalog'
 
         data_product_version_summary_data_product_model = {}  # DataProductVersionSummaryDataProduct
         data_product_version_summary_data_product_model['id'] = 'b38df608-d34b-4d58-8136-ed25e6c6684e'
+        data_product_version_summary_data_product_model['release'] = data_product_draft_version_release_model
         data_product_version_summary_data_product_model['container'] = container_reference_model
 
         use_case_model = {}  # UseCase
@@ -4013,6 +3780,7 @@ class TestModel_DataProductVersionSummary:
         data_product_contract_terms_model['asset'] = asset_reference_model
         data_product_contract_terms_model['id'] = 'testString'
         data_product_contract_terms_model['documents'] = [contract_terms_document_model]
+        data_product_contract_terms_model['error_msg'] = 'testString'
 
         # Construct a json representation of a DataProductVersionSummary model
         data_product_version_summary_model_json = {}
@@ -4063,6 +3831,9 @@ class TestModel_DataProductVersionSummaryDataProduct:
 
         # Construct dict forms of any model objects needed in order to build this model.
 
+        data_product_draft_version_release_model = {}  # DataProductDraftVersionRelease
+        data_product_draft_version_release_model['id'] = '18bdbde1-918e-4ecf-aa23-6727bf319e14'
+
         container_reference_model = {}  # ContainerReference
         container_reference_model['id'] = 'd29c42eb-7100-4b7a-8257-c196dbcca1cd'
         container_reference_model['type'] = 'catalog'
@@ -4070,6 +3841,7 @@ class TestModel_DataProductVersionSummaryDataProduct:
         # Construct a json representation of a DataProductVersionSummaryDataProduct model
         data_product_version_summary_data_product_model_json = {}
         data_product_version_summary_data_product_model_json['id'] = 'b38df608-d34b-4d58-8136-ed25e6c6684e'
+        data_product_version_summary_data_product_model_json['release'] = data_product_draft_version_release_model
         data_product_version_summary_data_product_model_json['container'] = container_reference_model
 
         # Construct a model instance of DataProductVersionSummaryDataProduct by calling from_dict on the json representation
@@ -4111,8 +3883,15 @@ class TestModel_DataProductWorkflows:
 
         # Construct dict forms of any model objects needed in order to build this model.
 
+        data_product_custom_workflow_definition_model = {}  # DataProductCustomWorkflowDefinition
+        data_product_custom_workflow_definition_model['id'] = '18bdbde1-918e-4ecf-aa23-6727bf319e14'
+
         data_product_order_access_request_model = {}  # DataProductOrderAccessRequest
         data_product_order_access_request_model['task_assignee_users'] = ['testString']
+        data_product_order_access_request_model['pre_approved_users'] = ['testString']
+        data_product_order_access_request_model['custom_workflow_definition'] = (
+            data_product_custom_workflow_definition_model
+        )
 
         # Construct a json representation of a DataProductWorkflows model
         data_product_workflows_model_json = {}
@@ -4298,6 +4077,16 @@ class TestModel_InitializeResource:
         initialized_option_model['name'] = 'testString'
         initialized_option_model['version'] = 1
 
+        workflow_definition_reference_model = {}  # WorkflowDefinitionReference
+        workflow_definition_reference_model['id'] = '18bdbde1-918e-4ecf-aa23-6727bf319e14'
+
+        provided_workflow_resource_model = {}  # ProvidedWorkflowResource
+        provided_workflow_resource_model['definition'] = workflow_definition_reference_model
+
+        provided_catalog_workflows_model = {}  # ProvidedCatalogWorkflows
+        provided_catalog_workflows_model['data_access'] = provided_workflow_resource_model
+        provided_catalog_workflows_model['request_new_product'] = provided_workflow_resource_model
+
         # Construct a json representation of a InitializeResource model
         initialize_resource_model_json = {}
         initialize_resource_model_json['container'] = container_reference_model
@@ -4310,6 +4099,7 @@ class TestModel_InitializeResource:
         initialize_resource_model_json['last_started_at'] = '2023-08-21T15:24:06.021000Z'
         initialize_resource_model_json['last_finished_at'] = '2023-08-21T20:24:34.450000Z'
         initialize_resource_model_json['initialized_options'] = [initialized_option_model]
+        initialize_resource_model_json['workflows'] = provided_catalog_workflows_model
 
         # Construct a model instance of InitializeResource by calling from_dict on the json representation
         initialize_resource_model = InitializeResource.from_dict(initialize_resource_model_json)
@@ -4422,6 +4212,84 @@ class TestModel_NextPage:
         assert next_page_model_json2 == next_page_model_json
 
 
+class TestModel_ProvidedCatalogWorkflows:
+    """
+    Test Class for ProvidedCatalogWorkflows
+    """
+
+    def test_provided_catalog_workflows_serialization(self):
+        """
+        Test serialization/deserialization for ProvidedCatalogWorkflows
+        """
+
+        # Construct dict forms of any model objects needed in order to build this model.
+
+        workflow_definition_reference_model = {}  # WorkflowDefinitionReference
+        workflow_definition_reference_model['id'] = '18bdbde1-918e-4ecf-aa23-6727bf319e14'
+
+        provided_workflow_resource_model = {}  # ProvidedWorkflowResource
+        provided_workflow_resource_model['definition'] = workflow_definition_reference_model
+
+        # Construct a json representation of a ProvidedCatalogWorkflows model
+        provided_catalog_workflows_model_json = {}
+        provided_catalog_workflows_model_json['data_access'] = provided_workflow_resource_model
+        provided_catalog_workflows_model_json['request_new_product'] = provided_workflow_resource_model
+
+        # Construct a model instance of ProvidedCatalogWorkflows by calling from_dict on the json representation
+        provided_catalog_workflows_model = ProvidedCatalogWorkflows.from_dict(provided_catalog_workflows_model_json)
+        assert provided_catalog_workflows_model != False
+
+        # Construct a model instance of ProvidedCatalogWorkflows by calling from_dict on the json representation
+        provided_catalog_workflows_model_dict = ProvidedCatalogWorkflows.from_dict(
+            provided_catalog_workflows_model_json
+        ).__dict__
+        provided_catalog_workflows_model2 = ProvidedCatalogWorkflows(**provided_catalog_workflows_model_dict)
+
+        # Verify the model instances are equivalent
+        assert provided_catalog_workflows_model == provided_catalog_workflows_model2
+
+        # Convert model instance back to dict and verify no loss of data
+        provided_catalog_workflows_model_json2 = provided_catalog_workflows_model.to_dict()
+        assert provided_catalog_workflows_model_json2 == provided_catalog_workflows_model_json
+
+
+class TestModel_ProvidedWorkflowResource:
+    """
+    Test Class for ProvidedWorkflowResource
+    """
+
+    def test_provided_workflow_resource_serialization(self):
+        """
+        Test serialization/deserialization for ProvidedWorkflowResource
+        """
+
+        # Construct dict forms of any model objects needed in order to build this model.
+
+        workflow_definition_reference_model = {}  # WorkflowDefinitionReference
+        workflow_definition_reference_model['id'] = '18bdbde1-918e-4ecf-aa23-6727bf319e14'
+
+        # Construct a json representation of a ProvidedWorkflowResource model
+        provided_workflow_resource_model_json = {}
+        provided_workflow_resource_model_json['definition'] = workflow_definition_reference_model
+
+        # Construct a model instance of ProvidedWorkflowResource by calling from_dict on the json representation
+        provided_workflow_resource_model = ProvidedWorkflowResource.from_dict(provided_workflow_resource_model_json)
+        assert provided_workflow_resource_model != False
+
+        # Construct a model instance of ProvidedWorkflowResource by calling from_dict on the json representation
+        provided_workflow_resource_model_dict = ProvidedWorkflowResource.from_dict(
+            provided_workflow_resource_model_json
+        ).__dict__
+        provided_workflow_resource_model2 = ProvidedWorkflowResource(**provided_workflow_resource_model_dict)
+
+        # Verify the model instances are equivalent
+        assert provided_workflow_resource_model == provided_workflow_resource_model2
+
+        # Convert model instance back to dict and verify no loss of data
+        provided_workflow_resource_model_json2 = provided_workflow_resource_model.to_dict()
+        assert provided_workflow_resource_model_json2 == provided_workflow_resource_model_json
+
+
 class TestModel_ServiceIdCredentials:
     """
     Test Class for ServiceIdCredentials
@@ -4489,6 +4357,40 @@ class TestModel_UseCase:
         # Convert model instance back to dict and verify no loss of data
         use_case_model_json2 = use_case_model.to_dict()
         assert use_case_model_json2 == use_case_model_json
+
+
+class TestModel_WorkflowDefinitionReference:
+    """
+    Test Class for WorkflowDefinitionReference
+    """
+
+    def test_workflow_definition_reference_serialization(self):
+        """
+        Test serialization/deserialization for WorkflowDefinitionReference
+        """
+
+        # Construct a json representation of a WorkflowDefinitionReference model
+        workflow_definition_reference_model_json = {}
+        workflow_definition_reference_model_json['id'] = '18bdbde1-918e-4ecf-aa23-6727bf319e14'
+
+        # Construct a model instance of WorkflowDefinitionReference by calling from_dict on the json representation
+        workflow_definition_reference_model = WorkflowDefinitionReference.from_dict(
+            workflow_definition_reference_model_json
+        )
+        assert workflow_definition_reference_model != False
+
+        # Construct a model instance of WorkflowDefinitionReference by calling from_dict on the json representation
+        workflow_definition_reference_model_dict = WorkflowDefinitionReference.from_dict(
+            workflow_definition_reference_model_json
+        ).__dict__
+        workflow_definition_reference_model2 = WorkflowDefinitionReference(**workflow_definition_reference_model_dict)
+
+        # Verify the model instances are equivalent
+        assert workflow_definition_reference_model == workflow_definition_reference_model2
+
+        # Convert model instance back to dict and verify no loss of data
+        workflow_definition_reference_model_json2 = workflow_definition_reference_model.to_dict()
+        assert workflow_definition_reference_model_json2 == workflow_definition_reference_model_json
 
 
 # endregion
