@@ -20,6 +20,7 @@ import sys
 import pkg_resources
 
 __version__ = '0.2.0'
+
 PACKAGE_NAME = 'dph_services'
 PACKAGE_DESC = 'Python client library for DPH Services'
 
